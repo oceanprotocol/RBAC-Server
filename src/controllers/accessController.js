@@ -8,7 +8,7 @@ function access(req, res, next){
     const role = checkRole(credentials.type, credentials.id);
     console.log("role:", role);
     const response = checkAbilities(role, eventType, component);
-
+    console.log("Permission response:", response);
     res.send(response);
 }
 

@@ -8,15 +8,12 @@ function checkAbilities(role, eventType, component){
     switch(role){
         case "admin":
             response = adminAbility.can(eventType, component);
-            console.log('can read Post', response);
             return response;
         case "publisher":
             response = publisherAbility.can(eventType, component);
-            console.log('can read Post', response);
             return response;
         case "user":
             response = userAbility.can(eventType, component);
-            console.log('can read Post', response);
             return response;
     }
 }
