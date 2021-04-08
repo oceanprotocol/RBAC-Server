@@ -1,18 +1,23 @@
 const adminAbility = require('../abilities/adminAbility');
-const publisherAbility = require('../abilities/adminAbility');
-const userAbility = require('../abilities/adminAbility');
+const publisherAbility = require('../abilities/publisherAbility');
+const userAbility = require('../abilities/userAbility');
 
 function checkAbilities(role, eventType, component){
+    let response;
+
     switch(role){
         case "admin":
-            console.log('can read Post', adminAbility.can('read', 'Post'));
-            break;
+            response = adminAbility.can(eventType, component);
+            console.log('can read Post', response);
+            return response;
         case "publisher":
-            console.log('can read Post', publisherAbility.can('read', 'Post'));
-            break;
+            response = publisherAbility.can(eventType, component);
+            console.log('can read Post', response);
+            return response;
         case "user":
-            console.log('can read Post', userAbility.can('read', 'Post'));
-            break;
+            response = userAbility.can(eventType, component);
+            console.log('can read Post', response);
+            return response;
     }
 }
 
