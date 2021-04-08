@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const access = require('../conrollers/accessController');
 
-/* GET role. */
+/* GET Access role premissions. */
 router.get('/', function(req, res, next) {
-    access(res);
+    access(req, res, next);
 });
 
 module.exports = router;
