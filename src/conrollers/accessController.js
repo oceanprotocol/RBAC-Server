@@ -1,4 +1,5 @@
 const checkRole = require('../utils/checkRole');
+const checkAbilities = require('../utils/checkAbilities');
 
 function access(req, res, next){
     console.log("Request:", req.body);
@@ -6,9 +7,9 @@ function access(req, res, next){
 
     const role = checkRole(credentials.type, credentials.id);
     console.log("role:", role);
+    const response = checkAbilities(role, eventType, component);
 
-
-    res.send("Test 1 - true");
+    res.send(response);
 }
 
 module.exports = access;
