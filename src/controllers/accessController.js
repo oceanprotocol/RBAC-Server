@@ -9,7 +9,7 @@ function access(req, res, next){
     console.log("role:", role);
     const response = checkAbilities(role, eventType, component);
     console.log("Permission response:", response);
-    res.send(response);
+    res.json(response);
 }
 
 module.exports = access;
