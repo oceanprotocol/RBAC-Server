@@ -1,0 +1,27 @@
+{
+  "name": "rbac-server",
+  "version": "0.0.1",
+  "description": " Ocean role-based access control server",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  "keywords": [
+    "casl",
+    "RBAC"
+  ],
+  "author": "Ocean Protocol <devops@oceanprotocol.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/oceanprotocol/RBAC-Server/issues"
+  },
+  "homepage": "https://github.com/oceanprotocol/RBAC-Server#readme",
+  "dependencies": {
+    "@casl/ability": "^5.2.2",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7",
+    "typescript": "3.9.2"
+  }
+}
