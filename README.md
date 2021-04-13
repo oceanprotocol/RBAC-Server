@@ -29,7 +29,7 @@ npm run start
 
 - Download and install [Postman](https://www.postman.com/downloads/)
 
-- Send a GET request to `http://localhost:3000`
+- Send a POST request to `http://localhost:3000`
 
 - Use one of the following JSON snippets as the body of the request:
 
