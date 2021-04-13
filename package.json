@@ -1,6 +1,6 @@
 {
   "name": "rbac-server",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": " Ocean role-based access control server",
   "main": "index.js",
   "scripts": {
