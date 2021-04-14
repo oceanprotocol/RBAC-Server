@@ -1,9 +1,9 @@
-const { defineAbility } = require('@casl/ability');
+import { defineAbility } from '@casl/ability';
 
 module.exports = defineAbility((can, cannot) => {
   can('publish', 'market');
   can('consume', 'market');
   can('consume', 'provider');
-  can('delete', 'provider');
-  can('delete', 'market');
+  cannot('delete', 'provider');
+  cannot('delete', 'market');
 });

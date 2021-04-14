@@ -1,7 +1,7 @@
-const checkRole = require('../utils/checkRole');
+import { checkRole } from '../utils/checkRole';
 const checkAbilities = require('../utils/checkAbilities');
 
-function access(req, res, next){
+function accessController(req, res, next){
     console.log("Request:", req.body);
     const { eventType, component, credentials } = req.body;
 
@@ -12,4 +12,4 @@ function access(req, res, next){
     res.json(response);
 }
 
-module.exports = access;
+module.exports = accessController;
