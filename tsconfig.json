@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+      "target": "esnext",
+      "module": "commonjs",
+      "lib": ["dom", "es2017"],
+      "resolveJsonModule": true,
+      "moduleResolution": "Node",
+      "esModuleInterop": true,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "noEmit": true,
+      "sourceMap": true,
+      "noImplicitAny": true,
+      "skipLibCheck": true,
+      "allowJs": true
+      //"baseUrl": "./src"
+    },
+    "exclude": ["node_modules", "*.js"],
+    "include": ["./src/**/*"]
+  }
+  
