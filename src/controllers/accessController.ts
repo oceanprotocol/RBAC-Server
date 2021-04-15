@@ -1,7 +1,8 @@
 import { checkRole } from '../utils/checkRole';
+import {Request, Response} from 'express';
 const checkAbilities = require('../utils/checkAbilities');
 
-function accessController(req, res, next){
+export function accessController(req: Request, res: Response){
     console.log("Request:", req.body);
     const { eventType, component, credentials } = req.body;
 
@@ -11,5 +12,3 @@ function accessController(req, res, next){
     console.log("Permission response:", response);
     res.json(response);
 }
-
-module.exports = accessController;
