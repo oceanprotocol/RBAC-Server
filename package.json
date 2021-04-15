@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/app.js",
     "build": "npm run clean && tsc --sourcemap",
-    "clean": "rm -rf"
+    "clean": "rm -rf ./dist"
   },
   "keywords": [
     "casl",
