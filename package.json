@@ -4,7 +4,7 @@
   "description": " Ocean role-based access control server",
   "main": "index.js",
   "scripts": {
-    "start": "node src/app.js",
+    "start": "node dist/app.js",
     "build": "npm run clean && tsc --sourcemap",
     "clean": "rm -rf ./dist"
   },

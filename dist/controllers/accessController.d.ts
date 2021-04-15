@@ -1,2 +1,3 @@
 import { Request, Response } from 'express';
-export declare function accessController(req: Request, res: Response): void;
+declare function accessController(req: Request, res: Response): void;
+export default accessController;
