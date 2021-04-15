@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.checkAbilities = void 0;
 var adminAbility = require('../abilities/adminAbility');
 var publisherAbility = require('../abilities/publisherAbility');
 var userAbility = require('../abilities/userAbility');

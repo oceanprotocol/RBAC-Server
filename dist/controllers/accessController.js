@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.accessController = void 0;
 var checkRole_1 = require("../utils/checkRole");
 var checkAbilities = require('../utils/checkAbilities');
 function accessController(req, res) {

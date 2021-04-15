@@ -1,4 +1,4 @@
-[
+const users = [
 {
     "authType": "address",
     "auth": "0x0123456789",
@@ -25,3 +25,4 @@
     "role": "admin"
 }
 ]
+export default users;

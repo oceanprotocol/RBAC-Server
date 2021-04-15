@@ -1,4 +1,4 @@
-const users = require('../data/users.json');
+import users from '../data/users';
 
 export function checkRole(type: String, id: String){
     console.log("type:", type);

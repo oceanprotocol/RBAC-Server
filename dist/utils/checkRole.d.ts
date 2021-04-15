@@ -1,1 +1,1 @@
-export declare function checkRole(type: String, id: String): any;
+export declare function checkRole(type: String, id: String): string;
