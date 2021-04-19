@@ -1,6 +1,6 @@
-const users = require('../data/users.json');
+import users from '../data/users';
 
-function checkRole(type, id){
+export function checkRole(type: String, id: String){
     console.log("type:", type);
     console.log("id:", id);
     for (let i = 0; i < users.length; i++) {
@@ -9,5 +9,3 @@ function checkRole(type, id){
         }
       } 
 }
-
-module.exports = checkRole;

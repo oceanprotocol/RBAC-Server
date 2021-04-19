@@ -2,7 +2,7 @@ const adminAbility = require('../abilities/adminAbility');
 const publisherAbility = require('../abilities/publisherAbility');
 const userAbility = require('../abilities/userAbility');
 
-function checkAbilities(role, eventType, component){
+function checkAbilities(role: String, eventType: String, component: String){
     let response;
 
     switch(role){
@@ -18,4 +18,4 @@ function checkAbilities(role, eventType, component){
     }
 }
 
-module.exports = checkAbilities;
+export default checkAbilities;
