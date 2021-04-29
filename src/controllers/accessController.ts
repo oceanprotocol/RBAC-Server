@@ -1,5 +1,6 @@
 import {Request, Response} from 'express';
 import test from '../authModules/test';
+import keycloack from '../authModules/keycloak';
 
 function accessController(req: Request, res: Response){
     console.log("Request:", req.body);
@@ -10,6 +11,8 @@ function accessController(req: Request, res: Response){
             test(res, credentials, eventType, component);
             break;
         case "keycloack":
+            keycloack(res, credentials, eventType, component);
+            break;
 
     }
 
