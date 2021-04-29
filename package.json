@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node dist/app.js",
+    "dev": "nodemon dist/app.js",
     "build": "npm run clean && tsc --sourcemap",
     "clean": "rm -rf ./dist"
   },
