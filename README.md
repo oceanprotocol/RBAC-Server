@@ -19,7 +19,13 @@ cd RBAC-Server
 npm install
 ```
 
-3. Start the server
+3. Build the service
+
+```Bash
+npm run build
+```
+
+4. Start the server
 
 ```Bash
 npm run start
