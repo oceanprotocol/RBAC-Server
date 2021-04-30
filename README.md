@@ -43,6 +43,7 @@ npm run start
 { 
      "eventType": "publish", 
      "component": "market" , 
+     "authService": "keycloak",
      "credentials": {
               "type": "address",
               "token": "0x0123456789"
@@ -54,6 +55,7 @@ npm run start
 { 
      "eventType": "publish", 
      "component": "provider" , 
+     "authService": "keycloak",
      "credentials": {
               "type": "Oauth2",
               "token": "0N2JK21J7I55U7HK8459J2N34506J43K"
@@ -65,6 +67,7 @@ npm run start
 { 
      "eventType": "delete", 
      "component": "market" , 
+     "authService": "keycloak",
      "credentials": {
               "type": "address",
               "token": "0x0123456789"
@@ -76,6 +79,7 @@ npm run start
 { 
      "eventType": "publish", 
      "component": "market" , 
+     "authService": "keycloak",
      "credentials": {
               "type": "3BoxProfile",
               "token": "0x9876543210"
@@ -87,6 +91,7 @@ npm run start
 { 
      "eventType": "delete", 
      "component": "provider" , 
+     "authService": "keycloak",
      "credentials": {
               "type": "Oauth2",
               "token": "0N2JK21J7I55U7HK8459J2N34506J43K"
@@ -99,6 +104,7 @@ npm run start
 { 
      "eventType": "consume", 
      "component": "market" , 
+     "authService": "keycloak",
      "credentials": {
               "type": "3BoxProfile",
               "token": "0x9876543210"
@@ -110,6 +116,7 @@ npm run start
 { 
      "eventType": "publish", 
      "component": "market" , 
+     "authService": "keycloak",
      "credentials": {
               "type": "Ldap",
               "token": "NJKJ7I5UHK45JNJ43K"
@@ -121,6 +128,7 @@ npm run start
 { 
      "eventType": "publish", 
      "component": "provider" , 
+     "authService": "keycloak",
      "credentials": {
               "type": "3BoxProfile",
               "token": "0x9876543210"
@@ -132,6 +140,7 @@ npm run start
 { 
      "eventType": "delete", 
      "component": "market" , 
+     "authService": "keycloak",
      "credentials": {
               "type": "3BoxProfile",
               "token": "0x9876543210"
@@ -143,6 +152,7 @@ npm run start
 { 
      "eventType": "consume", 
      "component": "market" , 
+     "authService": "keycloak",
      "credentials": {
               "type": "Ldap",
               "token": "NJKJ7I5UHK45JNJ43K"
