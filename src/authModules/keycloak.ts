@@ -3,7 +3,6 @@ import fetch from 'cross-fetch'
 
 export default async function keycloak(res: Response, credentials, eventType: String, component: String){
     const request = `Bearer ${credentials.token}`
-    console.log("Keycloak request token:", request);
     // Request to keyclock auth service will take place here...
     const url = 'https://keycloak-int.data-marketplace.io/auth/realms/marketplace/protocol/openid-connect/userinfo'
 
