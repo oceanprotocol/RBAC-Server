@@ -11,7 +11,7 @@ function accessController(req: Request, res: Response){
             test(res, credentials, eventType, component);
             break;
         case "keycloak": 
-            keycloak(res, credentials, eventType, component);
+            keycloak(res, credentials.token, eventType, component);
             break;
         default:
             console.log("Auth Type unkown");

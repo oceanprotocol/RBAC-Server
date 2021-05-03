@@ -1,8 +1,33 @@
 import {Response} from 'express';
 import fetch from 'cross-fetch'
+import jwt_decode from "jwt-decode";
+import checkAbilities from '../utils/checkAbilities';
 
-export default async function keycloak(res: Response, credentials, eventType: String, component: String){
-    const request = `Bearer ${credentials.token}`
+interface decodedToken {
+  exp?: number;
+  iat?: number;
+  jti?: string;
+  iss?: string;
+  aud?: string[] | string;
+  sub?: string;
+  nbf?: number;
+  typ?: string;
+  azp?: string;
+  session_state?: string;
+  acr?: string;
+  realm_access?: { roles?: string[] | string };
+  resource_access?: { account?: { roles?: string[] | string } };
+  scope?: string;
+  email_verified?: boolean;
+  name?: string;
+  preferred_username?: string;
+  given_name?: string;
+  family_name?: string;
+  email?: string
+}
+
+export default async function keycloak(res: Response, token: string, eventType: string, component: string){
+    const request = `Bearer ${token}`
     // Request to keyclock auth service will take place here...
     const url = 'https://keycloak-int.data-marketplace.io/auth/realms/marketplace/protocol/openid-connect/userinfo'
 
@@ -14,16 +39,20 @@ export default async function keycloak(res: Response, credentials, eventType: St
         },
         credentials: "same-origin"
       }).then(function(response) {
-          console.log("Response:", response)
-        response.status     //=> number 100–599
-        response.statusText //=> String
-        response.headers    //=> Headers
-        response.url        //=> String
-      
-        return response.text()
+        return response.status
       }, function(error) {
-        error.message //=> String
+        console.log(error.message) //=> String
+        res.json(false);
       })
+      console.log(response)
+    if(response === 200){
+      const decodedToken: decodedToken = jwt_decode(token);
+      console.log(decodedToken.)
+      const role = 'publisher'
+      const response = checkAbilities(role, eventType, component);
+      res.json(response);
+    } else{
+      res.json(false);
+    }
     
-    res.json(response);
 }
