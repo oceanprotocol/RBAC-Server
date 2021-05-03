@@ -41,26 +41,22 @@ export default async function keycloak(res: Response, token: string, eventType: 
       }).then(function(response) {
         return response.status
       }, function(error) {
-        console.log(error.message) //=> String
+        console.log(error.message)
         res.json(false);
       })
-      console.log(responseStatus)
+    
     if(responseStatus === 200){
       const decodedToken: decodedToken = jwt_decode(token);
-      console.log(decodedToken)
       const role = decodedToken.realm_access.roles
       let response: boolean;
       for(let i: number = 0; i < role.length; i++){
-        console.log("role[i]", role[i])
         response = checkAbilities(role[i], eventType, component);
-        console.log("response",  i, response)
         if(response === true){
           break
         } else{
           continue
         }
       } 
-      console.log("response", response)
       res.json(response);
     } else{
       res.json(false);

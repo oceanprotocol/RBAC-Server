@@ -3,7 +3,6 @@ import test from '../authModules/test';
 import keycloak from '../authModules/keycloak';
 
 function accessController(req: Request, res: Response){
-    console.log("Request:", req.body);
     const { eventType, component, credentials,  authService} = req.body;
     
     switch(authService){
