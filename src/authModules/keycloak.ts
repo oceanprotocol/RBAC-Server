@@ -53,7 +53,7 @@ export default async function keycloak(res: Response, token: string, eventType: 
       for(let i: number = 0; i < role.length; i++){
         console.log("role[i]", role[i])
         response = checkAbilities(role[i], eventType, component);
-      console.log("response",  i, response)
+        console.log("response",  i, response)
         if(response === true){
           break
         } else{

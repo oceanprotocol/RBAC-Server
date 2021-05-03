@@ -15,5 +15,9 @@ export default function checkAbilities(role: String, eventType: String, componen
         case "user":
             response = userAbility.can(eventType, component);
             return response;
+        default:
+            console.log("Unrecognised user role")
+            response = false;
+            return response;
     }
 }
