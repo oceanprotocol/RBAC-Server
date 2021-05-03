@@ -31,7 +31,7 @@ export default async function keycloak(res: Response, token: string, eventType: 
     // Request to keyclock auth service will take place here...
     const url = 'https://keycloak-int.data-marketplace.io/auth/realms/marketplace/protocol/openid-connect/userinfo'
 
-    const response = await fetch(url, {
+    const responseStatus = await fetch(url, {
         method: "GET",
          headers: {
           "Content-Type": "application/json",
@@ -44,12 +44,23 @@ export default async function keycloak(res: Response, token: string, eventType: 
         console.log(error.message) //=> String
         res.json(false);
       })
-      console.log(response)
-    if(response === 200){
+      console.log(responseStatus)
+    if(responseStatus === 200){
       const decodedToken: decodedToken = jwt_decode(token);
-      console.log(decodedToken.)
-      const role = 'publisher'
-      const response = checkAbilities(role, eventType, component);
+      console.log(decodedToken)
+      const role = decodedToken.realm_access.roles
+      let response: boolean;
+      for(let i: number = 0; i < role.length; i++){
+        console.log("role[i]", role[i])
+        response = checkAbilities(role[i], eventType, component);
+      console.log("response",  i, response)
+        if(response === true){
+          break
+        } else{
+          continue
+        }
+      } 
+      console.log("response", response)
       res.json(response);
     } else{
       res.json(false);
