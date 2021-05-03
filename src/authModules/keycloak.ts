@@ -41,10 +41,9 @@ export default async function keycloak(res: Response, token: string, eventType: 
       }).then(function(response) {
         return response.status
       }, function(error) {
-        console.log(error.message)
+        console.log(error.message) 
         res.json(false);
       })
-    
     if(responseStatus === 200){
       const decodedToken: decodedToken = jwt_decode(token);
       const role = decodedToken.realm_access.roles
