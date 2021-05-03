@@ -1,16 +1,25 @@
-import { checkRole } from '../utils/checkRole';
 import {Request, Response} from 'express';
-import checkAbilities from '../utils/checkAbilities';
+import test from '../authModules/test';
+import keycloak from '../authModules/keycloak';
 
 function accessController(req: Request, res: Response){
     console.log("Request:", req.body);
-    const { eventType, component, credentials } = req.body;
+    const { eventType, component, credentials,  authService} = req.body;
+    
+    switch(authService){
+        case "test":
+            test(res, credentials, eventType, component);
+            break;
+        case "keycloak": 
+            keycloak(res, credentials, eventType, component);
+            break;
+        default:
+            console.log("Auth Type unkown");
+            const response = false;
+            res.json(response);
+            break;
 
-    const role = checkRole(credentials.type, credentials.id);
-    console.log("role:", role);
-    const response = checkAbilities(role, eventType, component);
-    console.log("Permission response:", response);
-    res.json(response);
+    }
 }
 
 export default accessController;

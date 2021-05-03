@@ -19,7 +19,13 @@ cd RBAC-Server
 npm install
 ```
 
-3. Start the server
+3. Build the service
+
+```Bash
+npm run build
+```
+
+4. Start the server
 
 ```Bash
 npm run start
@@ -37,9 +43,10 @@ npm run start
 { 
      "eventType": "publish", 
      "component": "market" , 
+     "authService": "keycloak",
      "credentials": {
               "type": "address",
-              "id": "0x0123456789"
+              "token": "0x0123456789"
      }
 }
 ```
@@ -48,9 +55,10 @@ npm run start
 { 
      "eventType": "publish", 
      "component": "provider" , 
+     "authService": "keycloak",
      "credentials": {
               "type": "Oauth2",
-              "id": "0N2JK21J7I55U7HK8459J2N34506J43K"
+              "token": "0N2JK21J7I55U7HK8459J2N34506J43K"
      }
 }
 ```
@@ -59,9 +67,10 @@ npm run start
 { 
      "eventType": "delete", 
      "component": "market" , 
+     "authService": "keycloak",
      "credentials": {
               "type": "address",
-              "id": "0x0123456789"
+              "token": "0x0123456789"
      }
 }
 ```
@@ -70,9 +79,10 @@ npm run start
 { 
      "eventType": "publish", 
      "component": "market" , 
+     "authService": "keycloak",
      "credentials": {
               "type": "3BoxProfile",
-              "id": "0x9876543210"
+              "token": "0x9876543210"
      }
 }
 ```
@@ -81,9 +91,10 @@ npm run start
 { 
      "eventType": "delete", 
      "component": "provider" , 
+     "authService": "keycloak",
      "credentials": {
               "type": "Oauth2",
-              "id": "0N2JK21J7I55U7HK8459J2N34506J43K"
+              "token": "0N2JK21J7I55U7HK8459J2N34506J43K"
      }
 }
 ```
@@ -93,9 +104,10 @@ npm run start
 { 
      "eventType": "consume", 
      "component": "market" , 
+     "authService": "keycloak",
      "credentials": {
               "type": "3BoxProfile",
-              "id": "0x9876543210"
+              "token": "0x9876543210"
      }
 }
 ```
@@ -104,9 +116,10 @@ npm run start
 { 
      "eventType": "publish", 
      "component": "market" , 
+     "authService": "keycloak",
      "credentials": {
               "type": "Ldap",
-              "id": "NJKJ7I5UHK45JNJ43K"
+              "token": "NJKJ7I5UHK45JNJ43K"
      }
 }
 ```
@@ -115,9 +128,10 @@ npm run start
 { 
      "eventType": "publish", 
      "component": "provider" , 
+     "authService": "keycloak",
      "credentials": {
               "type": "3BoxProfile",
-              "id": "0x9876543210"
+              "token": "0x9876543210"
      }
 }
 ```
@@ -126,9 +140,10 @@ npm run start
 { 
      "eventType": "delete", 
      "component": "market" , 
+     "authService": "keycloak",
      "credentials": {
               "type": "3BoxProfile",
-              "id": "0x9876543210"
+              "token": "0x9876543210"
      }
 }
 ```
@@ -137,9 +152,10 @@ npm run start
 { 
      "eventType": "consume", 
      "component": "market" , 
+     "authService": "keycloak",
      "credentials": {
               "type": "Ldap",
-              "id": "NJKJ7I5UHK45JNJ43K"
+              "token": "NJKJ7I5UHK45JNJ43K"
      }
 }
 ```
