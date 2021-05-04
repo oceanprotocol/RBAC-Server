@@ -29,7 +29,7 @@ interface decodedToken {
 export default async function keycloak(res: Response, token: string, eventType: string, component: string){
     const request = `Bearer ${token}`
     // Request to keyclock auth service will take place here...
-    const url = 'https://keycloak-int.data-marketplace.io/auth/realms/marketplace/protocol/openid-connect/userinfo'
+    const url = process.env.KEYCLOAK_URL
 
     const responseStatus = await fetch(url, {
         method: "GET",
