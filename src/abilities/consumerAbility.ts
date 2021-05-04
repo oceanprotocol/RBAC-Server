@@ -3,18 +3,18 @@ import { defineAbility } from '@casl/ability';
 module.exports = defineAbility((can, cannot) => {
   // Market
   can('browse', 'market');
-  cannot('access', 'market');
+  can('consume', 'market');
+  can('compute', 'market');
+  can('access', 'market');
   cannot('update', 'market');
-  cannot('compute', 'market');
-  cannot('consume', 'market');
   cannot('publish', 'market');
   cannot('delete', 'market');
 
   // Provider
+  can('access', 'provider');
+  can('compute', 'provider');
   cannot('encryptUrl', 'provider');
   cannot('initialize', 'provider');
-  cannot('access', 'provider');
-  cannot('compute', 'provider');
 
   /// Metadatacache
   cannot('publish', 'metadatacache');
