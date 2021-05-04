@@ -13,7 +13,7 @@ export default function checkAbilities(role: String, eventType: String, componen
         case "publisher":
             response = publisherAbility.can(eventType, component);
             return response;
-        case "user":
+        case "consumer":
             response = consumerAbility.can(eventType, component);
             return response;
         case "user":
