@@ -15,5 +15,8 @@ export default function checkAbilities(role: String, eventType: String, componen
         case "user":
             response = userAbility.can(eventType, component);
             return response;
+        default:
+            response = false;
+            return response;
     }
 }
