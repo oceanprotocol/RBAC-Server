@@ -28,7 +28,6 @@ interface decodedToken {
 
 export default async function keycloak(res: Response, token: string, eventType: string, component: string){
     const request = `Bearer ${token}`
-    console.log("request", request)
     // Request to keyclock auth service will take place here...
     const url = process.env.KEYCLOAK_URL
 
