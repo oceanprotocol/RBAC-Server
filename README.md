@@ -31,6 +31,19 @@ npm run build
 npm run start
 ```
 
+## Running in Docker
+
+1. Replace the KEYCLOAK_URL in the Dockerfile with the correct URL for your hosting of keycloak.
+2. Run the following command to build the RBAC service in a Docker container: 
+```Bash
+npm run build:docker
+```
+3. Next, run the following command to start running the RBAC service in the Docker container:
+```Bash
+npm run start:docker
+```
+
+
 ## Sending Keycloak requests
 
 ### Step 1
