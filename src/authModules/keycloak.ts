@@ -31,7 +31,6 @@ export default async function keycloak(res: Response, token: string, eventType: 
     console.log("request", request)
     // Request to keyclock auth service will take place here...
     const url = process.env.KEYCLOAK_URL
-    console.log("URL", url)
 
     const responseStatus = await fetch(url, {
         method: "GET",
@@ -41,7 +40,6 @@ export default async function keycloak(res: Response, token: string, eventType: 
         },
         credentials: "same-origin"
       }).then(function(response) {
-        console.log("response", response)
         return response.status
       }, function(error) {
         console.log(error.message) 
