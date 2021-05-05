@@ -1,5 +1,6 @@
 FROM node:14
 
+# Replace KEYCLOAK_URL with the relevant URL for your own Keycloak hosting
 ENV KEYCLOAK_URL="https://keycloak-int.data-marketplace.io/auth/realms/marketplace/protocol/openid-connect/userinfo"
 
 # Create app directory
