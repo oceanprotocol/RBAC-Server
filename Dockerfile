@@ -1,7 +1,5 @@
 FROM node:14
 
-RUN npm run build
-
 # Create app directory
 WORKDIR /docker/app
 
