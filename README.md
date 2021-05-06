@@ -1,6 +1,6 @@
 # Role-Based Access Control Server
 
-This is a proof-of-concept (POC) version of the Ocean role-based access control (RBAC) server.
+This is the Ocean role-based access control (RBAC) server. It currently works with [Keycloak](https://www.keycloak.org/) but has been designed to expand to other identity management services. 
 
 ## Getting started
 
@@ -30,6 +30,20 @@ npm run build
 ```Bash
 npm run start
 ```
+
+## Running in Docker
+
+1. Replace the KEYCLOAK_URL in the Dockerfile with the correct URL for your hosting of keycloak.
+2. Run the following command to build the RBAC service in a Docker container: 
+```Bash
+npm run build:docker
+```
+3. Next, run the following command to start running the RBAC service in the Docker container:
+```Bash
+npm run start:docker
+```
+4. Now you are ready to send requests to the RBAC server via postman. Make sure to replace the URL to `http://localhost:49160` in your requests. 
+
 
 ## Sending Keycloak requests
 

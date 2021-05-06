@@ -7,6 +7,8 @@
     "start": "node dist/app.js",
     "dev": "nodemon",
     "build": "npm run clean && tsc --sourcemap",
+    "build:docker": "npm run build && docker build . -t ocean/rbac",
+    "start:docker": "docker run -p 49160:3000 -d ocean/rbac",
     "clean": "rm -rf ./dist"
   },
   "keywords": [
