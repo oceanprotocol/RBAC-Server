@@ -6,8 +6,8 @@ import json from '../authModules/json';
 function accessController(req: Request, res: Response){
     const { eventType, component, credentials} = req.body;
     let { authService } = req.body;
-    if (authService === ('' || undefined)){ authService === process.env.DEFAULT_AUTH_SERVICE };
-    
+    if (authService === ('' || undefined)){ authService = process.env.DEFAULT_AUTH_SERVICE };
+
     switch(authService){
         case "test":
             test(res, credentials, eventType, component);
