@@ -98,6 +98,20 @@ The body of the request should be in the following format:
 
 Make sure to insert the token that you have recieved from Keycloak in step 2. 
 
+## Sending JSON requests
+If you want to check if an address is currently in an allow or deny json list you can send a POST request in the following format: 
+
+```JSON
+{ 
+     "authService": "json",
+     "credentials": {
+              "address":"0x2dc7656ec7db88b098defb751b7401b5f6d8976f"
+     }
+}
+```
+
+Is you are running the RBAC server locally the POST request should be sent to: `http://localhost:3000` 
+
 ## Sending Test requests
 
 - Download and install [Postman](https://www.postman.com/downloads/)
