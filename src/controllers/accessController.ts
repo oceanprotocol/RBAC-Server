@@ -3,7 +3,9 @@ import test from '../authModules/test';
 import keycloak from '../authModules/keycloak';
 
 function accessController(req: Request, res: Response){
-    const { eventType, component, credentials,  authService} = req.body;
+    const { eventType, component, credentials } = req.body;
+    let { authService } = req.body;
+    if (authService === ('' || undefined)){ authService = process.env.DEFAULT_AUTH_SERVICE };
     
     switch(authService){
         case "test":
