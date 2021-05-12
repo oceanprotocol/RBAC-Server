@@ -1,6 +1,6 @@
 # Role-Based Access Control Server
 
-This is the Ocean role-based access control (RBAC) server. It currently works with [Keycloak](https://www.keycloak.org/) but has been designed to expand to other identity management services. 
+This is the Ocean role-based access control (RBAC) server. It currently works with [Keycloak](https://www.keycloak.org/) but has been designed to expand to other identity management services.
 
 ## Getting started
 
@@ -34,23 +34,28 @@ npm run start
 ## Running in Docker
 
 1. Replace the KEYCLOAK_URL in the Dockerfile with the correct URL for your hosting of keycloak.
-2. Run the following command to build the RBAC service in a Docker container: 
+2. Run the following command to build the RBAC service in a Docker container:
+
 ```Bash
 npm run build:docker
 ```
+
 3. Next, run the following command to start running the RBAC service in the Docker container:
+
 ```Bash
 npm run start:docker
 ```
-4. Now you are ready to send requests to the RBAC server via postman. Make sure to replace the URL to `http://localhost:49160` in your requests. 
 
+4. Now you are ready to send requests to the RBAC server via postman. Make sure to replace the URL to `http://localhost:49160` in your requests.
 
 ## Sending Keycloak requests
 
 ### Step 1
+
 - Download and install [Postman](https://www.postman.com/downloads/)
 
 ### Step 2
+
 - Send a POST request to `https://keycloak-int.data-marketplace.io/auth/realms/marketplace/protocol/openid-connect/token`
 
 Use the following body for the request:
@@ -80,15 +85,16 @@ The response will contain an access token, for example:
 ```
 
 ### Step 3
+
 - Now send a `POST` request to this URL: `http://localhost:3000`
 
-The body of the request should be in the following format: 
+The body of the request should be in the following format:
 
 ```JSON
-{ 
-     "eventType": "publish", 
+{
+     "eventType": "publish",
      "component": "market",
-     "authService": "keycloak", 
+     "authService": "keycloak",
      "credentials": {
               "type": "3BoxProfile",
               "token": "<INSERT ACCESS_TOKEN FROM STEP 2>"
@@ -96,7 +102,7 @@ The body of the request should be in the following format:
 }
 ```
 
-Make sure to insert the token that you have recieved from Keycloak in step 2. 
+Make sure to insert the token that you have recieved from Keycloak in step 2.
 
 ## Sending Test requests
 
@@ -107,9 +113,9 @@ Make sure to insert the token that you have recieved from Keycloak in step 2.
 - Use one of the following JSON snippets as the body of the request:
 
 ```JSON
-{ 
-     "eventType": "publish", 
-     "component": "market" , 
+{
+     "eventType": "publish",
+     "component": "market" ,
      "authService": "test",
      "credentials": {
               "type": "address",
@@ -119,9 +125,9 @@ Make sure to insert the token that you have recieved from Keycloak in step 2.
 ```
 
 ```JSON
-{ 
-     "eventType": "publish", 
-     "component": "provider" , 
+{
+     "eventType": "publish",
+     "component": "provider" ,
      "authService": "test",
      "credentials": {
               "type": "Oauth2",
@@ -131,9 +137,9 @@ Make sure to insert the token that you have recieved from Keycloak in step 2.
 ```
 
 ```JSON
-{ 
-     "eventType": "delete", 
-     "component": "market" , 
+{
+     "eventType": "delete",
+     "component": "market" ,
      "authService": "test",
      "credentials": {
               "type": "address",
@@ -143,9 +149,9 @@ Make sure to insert the token that you have recieved from Keycloak in step 2.
 ```
 
 ```JSON
-{ 
-     "eventType": "publish", 
-     "component": "market" , 
+{
+     "eventType": "publish",
+     "component": "market" ,
      "authService": "test",
      "credentials": {
               "type": "3BoxProfile",
@@ -155,9 +161,9 @@ Make sure to insert the token that you have recieved from Keycloak in step 2.
 ```
 
 ```JSON
-{ 
-     "eventType": "delete", 
-     "component": "provider" , 
+{
+     "eventType": "delete",
+     "component": "provider" ,
      "authService": "test",
      "credentials": {
               "type": "Oauth2",
@@ -166,11 +172,10 @@ Make sure to insert the token that you have recieved from Keycloak in step 2.
 }
 ```
 
-
 ```JSON
-{ 
-     "eventType": "consume", 
-     "component": "market" , 
+{
+     "eventType": "consume",
+     "component": "market" ,
      "authService": "test",
      "credentials": {
               "type": "3BoxProfile",
@@ -180,9 +185,9 @@ Make sure to insert the token that you have recieved from Keycloak in step 2.
 ```
 
 ```JSON
-{ 
-     "eventType": "publish", 
-     "component": "market" , 
+{
+     "eventType": "publish",
+     "component": "market" ,
      "authService": "test",
      "credentials": {
               "type": "Ldap",
@@ -192,9 +197,9 @@ Make sure to insert the token that you have recieved from Keycloak in step 2.
 ```
 
 ```JSON
-{ 
-     "eventType": "publish", 
-     "component": "provider" , 
+{
+     "eventType": "publish",
+     "component": "provider" ,
      "authService": "test",
      "credentials": {
               "type": "3BoxProfile",
@@ -204,9 +209,9 @@ Make sure to insert the token that you have recieved from Keycloak in step 2.
 ```
 
 ```JSON
-{ 
-     "eventType": "delete", 
-     "component": "market" , 
+{
+     "eventType": "delete",
+     "component": "market" ,
      "authService": "test",
      "credentials": {
               "type": "3BoxProfile",
@@ -216,9 +221,9 @@ Make sure to insert the token that you have recieved from Keycloak in step 2.
 ```
 
 ```JSON
-{ 
-     "eventType": "consume", 
-     "component": "market" , 
+{
+     "eventType": "consume",
+     "component": "market" ,
      "authService": "test",
      "credentials": {
               "type": "Ldap",
