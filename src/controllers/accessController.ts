@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import test from '../authModules/test'
 import keycloak from '../authModules/keycloak'
 
-function accessController(req: Request, res: Response) {
+function accessController(req: Request, res: Response): void {
   const { eventType, component, credentials } = req.body
   let { authService } = req.body
   if (authService === ('' || undefined)) {
@@ -18,8 +18,7 @@ function accessController(req: Request, res: Response) {
       break
     default:
       console.log('Auth Type unkown')
-      const response = false
-      res.json(response)
+      res.json(false)
       break
   }
 }

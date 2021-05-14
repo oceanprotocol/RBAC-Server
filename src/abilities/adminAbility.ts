@@ -1,6 +1,6 @@
 import { defineAbility } from '@casl/ability'
 
-module.exports = defineAbility((can, cannot) => {
+export default defineAbility((can) => {
   // Market
   can('browse', 'market')
   can('consume', 'market')

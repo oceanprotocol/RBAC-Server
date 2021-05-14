@@ -1,14 +1,14 @@
-const adminAbility = require('../abilities/adminAbility')
-const publisherAbility = require('../abilities/publisherAbility')
-const consumerAbility = require('../abilities/consumerAbility')
-const userAbility = require('../abilities/userAbility')
+import adminAbility from '../abilities/adminAbility'
+import publisherAbility from '../abilities/publisherAbility'
+import consumerAbility from '../abilities/consumerAbility'
+import userAbility from '../abilities/userAbility'
 
 export default function checkAbilities(
-  role: String,
-  eventType: String,
-  component: String
-) {
-  let response
+  role: string,
+  eventType: string,
+  component: string
+): boolean {
+  let response: boolean
 
   switch (role) {
     case 'admin':

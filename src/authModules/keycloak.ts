@@ -31,7 +31,7 @@ export default async function keycloak(
   token: string,
   eventType: string,
   component: string
-) {
+): Promise<void> {
   const request = `Bearer ${token}`
   // Request to keyclock auth service will take place here...
   const url = process.env.KEYCLOAK_URL
@@ -56,7 +56,7 @@ export default async function keycloak(
     const decodedToken: decodedToken = jwt_decode(token)
     const role = decodedToken.realm_access.roles
     let response: boolean
-    for (let i: number = 0; i < role.length; i++) {
+    for (let i = 0; i < role.length; i++) {
       response = checkAbilities(role[i], eventType, component)
       if (response === true) {
         break

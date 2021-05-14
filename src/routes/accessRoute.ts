@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import accessController from '../controllers/accessController'
-const express = require('express')
+import express from 'express'
 
 const router = express.Router()
 
@@ -9,4 +9,4 @@ router.post('/', function (req: Request, res: Response) {
   accessController(req, res)
 })
 
-module.exports = router
+export default router

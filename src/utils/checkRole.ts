@@ -1,6 +1,6 @@
 import users from '../data/users'
 
-export function checkRole(type: String, token: String) {
+export function checkRole(type: string, token: string): string {
   console.log('type:', type)
   console.log('Token:', token)
   for (let i = 0; i < users.length; i++) {
