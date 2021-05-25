@@ -1,6 +1,6 @@
 # Role-Based Access Control Server
 
-This is the Ocean role-based access control (RBAC) server. It currently works with [Keycloak](https://www.keycloak.org/) but has been designed to expand to other identity management services. 
+This is the Ocean role-based access control (RBAC) server. It currently works with [Keycloak](https://www.keycloak.org/) but has been designed to expand to other identity management services.
 
 ## Getting started
 
@@ -34,23 +34,28 @@ npm run start
 ## Running in Docker
 
 1. Replace the KEYCLOAK_URL in the Dockerfile with the correct URL for your hosting of keycloak.
-2. Run the following command to build the RBAC service in a Docker container: 
+2. Run the following command to build the RBAC service in a Docker container:
+
 ```Bash
 npm run build:docker
 ```
+
 3. Next, run the following command to start running the RBAC service in the Docker container:
+
 ```Bash
 npm run start:docker
 ```
-4. Now you are ready to send requests to the RBAC server via postman. Make sure to replace the URL to `http://localhost:49160` in your requests. 
 
+4. Now you are ready to send requests to the RBAC server via postman. Make sure to replace the URL to `http://localhost:49160` in your requests.
 
 ## Sending Keycloak requests
 
 ### Step 1
+
 - Download and install [Postman](https://www.postman.com/downloads/)
 
 ### Step 2
+
 - Send a POST request to `https://keycloak-int.data-marketplace.io/auth/realms/marketplace/protocol/openid-connect/token`
 
 Use the following body for the request:
@@ -80,15 +85,16 @@ The response will contain an access token, for example:
 ```
 
 ### Step 3
+
 - Now send a `POST` request to this URL: `http://localhost:3000`
 
-The body of the request should be in the following format: 
+The body of the request should be in the following format:
 
 ```JSON
-{ 
-     "eventType": "publish", 
+{
+     "eventType": "publish",
      "component": "market",
-     "authService": "keycloak", 
+     "authService": "keycloak",
      "credentials": {
               "type": "3BoxProfile",
               "token": "<INSERT ACCESS_TOKEN FROM STEP 2>"
@@ -96,13 +102,14 @@ The body of the request should be in the following format:
 }
 ```
 
-Make sure to insert the token that you have recieved from Keycloak in step 2. 
+Make sure to insert the token that you have recieved from Keycloak in step 2.
 
 ## Sending JSON requests
-If you want to check if an address is currently in an allow or deny json list you can send a POST request in the following format: 
+
+If you want to check if an address is currently in an allow or deny json list you can send a POST request in the following format:
 
 ```JSON
-{ 
+{
      "authService": "json",
      "credentials": {
               "address":"0x2dc7656ec7db88b098defb751b7401b5f6d8976f"
@@ -110,7 +117,7 @@ If you want to check if an address is currently in an allow or deny json list yo
 }
 ```
 
-Is you are running the RBAC server locally the POST request should be sent to: `http://localhost:3000` 
+Is you are running the RBAC server locally the POST request should be sent to: `http://localhost:3000`
 
 ## Sending Test requests
 
@@ -121,9 +128,9 @@ Is you are running the RBAC server locally the POST request should be sent to: `
 - Use one of the following JSON snippets as the body of the request:
 
 ```JSON
-{ 
-     "eventType": "publish", 
-     "component": "market" , 
+{
+     "eventType": "publish",
+     "component": "market" ,
      "authService": "test",
      "credentials": {
               "type": "address",
@@ -133,9 +140,9 @@ Is you are running the RBAC server locally the POST request should be sent to: `
 ```
 
 ```JSON
-{ 
-     "eventType": "publish", 
-     "component": "provider" , 
+{
+     "eventType": "publish",
+     "component": "provider" ,
      "authService": "test",
      "credentials": {
               "type": "Oauth2",
@@ -145,9 +152,9 @@ Is you are running the RBAC server locally the POST request should be sent to: `
 ```
 
 ```JSON
-{ 
-     "eventType": "delete", 
-     "component": "market" , 
+{
+     "eventType": "delete",
+     "component": "market" ,
      "authService": "test",
      "credentials": {
               "type": "address",
@@ -157,9 +164,9 @@ Is you are running the RBAC server locally the POST request should be sent to: `
 ```
 
 ```JSON
-{ 
-     "eventType": "publish", 
-     "component": "market" , 
+{
+     "eventType": "publish",
+     "component": "market" ,
      "authService": "test",
      "credentials": {
               "type": "3BoxProfile",
@@ -169,9 +176,9 @@ Is you are running the RBAC server locally the POST request should be sent to: `
 ```
 
 ```JSON
-{ 
-     "eventType": "delete", 
-     "component": "provider" , 
+{
+     "eventType": "delete",
+     "component": "provider" ,
      "authService": "test",
      "credentials": {
               "type": "Oauth2",
@@ -180,11 +187,10 @@ Is you are running the RBAC server locally the POST request should be sent to: `
 }
 ```
 
-
 ```JSON
-{ 
-     "eventType": "consume", 
-     "component": "market" , 
+{
+     "eventType": "consume",
+     "component": "market" ,
      "authService": "test",
      "credentials": {
               "type": "3BoxProfile",
@@ -194,9 +200,9 @@ Is you are running the RBAC server locally the POST request should be sent to: `
 ```
 
 ```JSON
-{ 
-     "eventType": "publish", 
-     "component": "market" , 
+{
+     "eventType": "publish",
+     "component": "market" ,
      "authService": "test",
      "credentials": {
               "type": "Ldap",
@@ -206,9 +212,9 @@ Is you are running the RBAC server locally the POST request should be sent to: `
 ```
 
 ```JSON
-{ 
-     "eventType": "publish", 
-     "component": "provider" , 
+{
+     "eventType": "publish",
+     "component": "provider" ,
      "authService": "test",
      "credentials": {
               "type": "3BoxProfile",
@@ -218,9 +224,9 @@ Is you are running the RBAC server locally the POST request should be sent to: `
 ```
 
 ```JSON
-{ 
-     "eventType": "delete", 
-     "component": "market" , 
+{
+     "eventType": "delete",
+     "component": "market" ,
      "authService": "test",
      "credentials": {
               "type": "3BoxProfile",
@@ -230,13 +236,30 @@ Is you are running the RBAC server locally the POST request should be sent to: `
 ```
 
 ```JSON
-{ 
-     "eventType": "consume", 
-     "component": "market" , 
+{
+     "eventType": "consume",
+     "component": "market" ,
      "authService": "test",
      "credentials": {
               "type": "Ldap",
               "token": "NJKJ7I5UHK45JNJ43K"
      }
 }
+```
+
+## ✨ Code Style
+
+Code style is automatically enforced through [ESLint](https://eslint.org) & [Prettier](https://prettier.io) rules:
+
+- Git pre-commit hook runs `prettier` on staged files, setup with [Husky](https://typicode.github.io/husky)
+- VS Code suggested extensions and settings for auto-formatting on file save
+
+For running linting and auto-formatting manually, you can use from the root of the project:
+
+```bash
+# linting check, also runs Typescript typings check
+npm run lint
+
+# auto format all files in the project with prettier, taking all configs into account
+npm run format
 ```
