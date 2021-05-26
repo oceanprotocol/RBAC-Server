@@ -104,6 +104,21 @@ The body of the request should be in the following format:
 
 Make sure to insert the token that you have recieved from Keycloak in step 2.
 
+## Sending Address requests
+
+You can find out the permission of the user using their address by sending a request in this format:
+
+```JSON
+{
+     "eventType": "consume",
+     "component": "market" ,
+     "authService": "address",
+     "credentials": {
+              "address":"0xETHEURM_ADRESS"
+     }
+}
+```
+
 ## Sending JSON requests
 
 If you want to check if an address is currently in an allow or deny json list you can send a POST request in the following format:
