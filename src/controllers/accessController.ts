@@ -19,11 +19,9 @@ function accessController(req: Request, res: Response): void {
       json(res, credentials.address)
       break
     case 'keycloak':
-      console.log('credentials.address', credentials.address)
-      keycloak(res, credentials.address, eventType, component)
+      keycloak(res, credentials.token, eventType, component)
       break
     case 'address':
-      console.log('Address request')
       address(res, credentials.address, eventType, component)
       break
     default:

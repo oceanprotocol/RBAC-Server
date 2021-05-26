@@ -10,28 +10,12 @@ export default async function address(
 ): Promise<void> {
   // Request to keyclock auth service will take place here...
   console.log('Address', address)
-  const url = `${process.env.KEYCLOAK_ADDRESS_URL}/${address}`
+  const url = `${process.env.KEYCLOAK_ADDRESS_URL}/0x9Bf750b5465a51689fA4235aAc1F37EC692ef7b2` // ${address}`
   console.log('url', url)
-  try {
-    await fetch(url, {
-      method: 'GET',
-      credentials: 'same-origin'
-    }).then(
-      function (response) {
-        console.log('Response', response)
-        if (response.status === 200) {
-          console.log('200 response', response)
-          console.log('json response', response.body)
-        } else {
-          res.json(false)
-        }
-      },
-      function (error) {
-        console.log(error.message)
-        res.json(false)
-      }
-    )
-  } catch (error) {
-    console.log('error')
-  }
+
+  const response = await fetch(url, {
+    method: 'GET'
+  })
+  const resJSON = await response.json()
+  console.log('resJSON', resJSON)
 }
