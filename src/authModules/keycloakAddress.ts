@@ -18,9 +18,11 @@ export default async function address(
       method: 'GET'
     })
     const resJSON: [keycloakResponse] = await response.json()
+    // Looping through all users that are returned for the address
     for (let i = 0; i < resJSON.length; i++) {
-      const roles = resJSON[i].userRoles
+      const roles: [string] = resJSON[i].userRoles
       let result = false
+      // Looping through all the roles the user has
       for (let i = 0; i < roles.length; i++) {
         result = checkAbilities(roles[i], eventType, component)
         console.log('result', result)
