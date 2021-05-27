@@ -104,6 +104,23 @@ The body of the request should be in the following format:
 
 Make sure to insert the token that you have recieved from Keycloak in step 2.
 
+## Sending Address requests
+
+You can find out the permission of the user using their address by sending a POST request in this format:
+
+```JSON
+{
+     "eventType": "consume",
+     "component": "market" ,
+     "authService": "address",
+     "credentials": {
+              "address":"0xETHEURM_ADRESS"
+     }
+}
+```
+
+If you are running the RBAC server locally the POST request should be sent to: `http://localhost:3000`
+
 ## Sending JSON requests
 
 If you want to check if an address is currently in an allow or deny json list you can send a POST request in the following format:
@@ -117,7 +134,11 @@ If you want to check if an address is currently in an allow or deny json list yo
 }
 ```
 
-Is you are running the RBAC server locally the POST request should be sent to: `http://localhost:3000`
+If you are running the RBAC server locally the POST request should be sent to: `http://localhost:3000`
+
+## Setting Default Auth Service
+
+You can change the default auth service in the .env file e.g. `DEFAULT_AUTH_SERVICE = "keycloak"`. This is the auth service that will be used if no `authService` is defined within the request.
 
 ## Sending Test requests
 

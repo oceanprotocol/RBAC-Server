@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import test from '../authModules/test'
-import keycloak from '../authModules/keycloak'
+import keycloak from '../authModules/keycloakToken'
+import address from '../authModules/keycloakAddress'
 import json from '../authModules/json'
 
 function accessController(req: Request, res: Response): void {
@@ -19,6 +20,9 @@ function accessController(req: Request, res: Response): void {
       break
     case 'keycloak':
       keycloak(res, credentials.token, eventType, component)
+      break
+    case 'address':
+      address(res, credentials.address, eventType, component)
       break
     default:
       console.log('Auth Type unkown')
