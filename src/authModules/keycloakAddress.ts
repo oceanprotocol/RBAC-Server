@@ -36,6 +36,9 @@ export default async function address(
           continue
         }
       }
+      if (result === true) {
+        break
+      }
     }
     res.json(result)
   } catch (error) {
