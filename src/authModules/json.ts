@@ -1,21 +1,45 @@
 import { Response } from 'express'
-import allow from '../data/allow.json'
-import deny from '../data/deny.json'
+import returnUser from '../utils/filterJson'
+import checkAbilities from '../utils/checkAbilities'
+interface jsonResponse {
+  address: string
+  id: string
+  userRoles: string[]
+}
 
-export default function json(res: Response, address: string): void {
-  let response = 'default'
-  for (let i = 0; i < allow.length; i++) {
-    if (allow[i] === address) {
-      response = 'allow'
-      break
+export default async function address(
+  res: Response,
+  address: string,
+  eventType: string,
+  component: string
+): Promise<void> {
+  try {
+    const resJSON: [jsonResponse] = returnUser(address)
+    // Respond flase if no users are found
+    if (resJSON.length < 1) {
+      res.json(false)
+      return
     }
-  }
-  for (let i = 0; i < deny.length; i++) {
-    if (deny[i] === address) {
-      response = 'deny'
-      break
+    let result = false
+    // Looping through all users that are returned for the address
+    for (let i = 0; i < resJSON.length; i++) {
+      const roles: string[] = resJSON[i].userRoles
+      // Looping through all the roles the user has
+      for (let i = 0; i < roles.length; i++) {
+        result = checkAbilities(roles[i], eventType, component)
+        if (result === true) {
+          break
+        } else {
+          continue
+        }
+      }
+      if (result === true) {
+        break
+      }
     }
+    res.json(result)
+  } catch (error) {
+    console.error(error)
+    res.json(false)
   }
-  console.log('Permission response:', response)
-  res.json(response)
 }

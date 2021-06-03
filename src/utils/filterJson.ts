@@ -6,10 +6,12 @@ interface userResponse {
   userRoles: string[]
 }
 
-export function returnUser(address: string): userResponse {
+export default function returnUser(address: string): [userResponse] {
+  let response: [userResponse]
   for (let i = 0; i < testRoles.length; i++) {
     if (testRoles[i].address === address) {
-      return testRoles[i]
+      response.push(testRoles[i])
     }
   }
+  return response
 }
