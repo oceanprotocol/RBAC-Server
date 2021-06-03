@@ -14,7 +14,7 @@ export default async function address(
   component: string
 ): Promise<void> {
   try {
-    const resJSON: [jsonResponse] = returnUser(address)
+    const resJSON: jsonResponse[] = returnUser(address)
     // Respond flase if no users are found
     if (resJSON.length < 1) {
       res.json(false)

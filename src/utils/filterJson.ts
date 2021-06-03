@@ -6,8 +6,8 @@ interface userResponse {
   userRoles: string[]
 }
 
-export default function returnUser(address: string): [userResponse] {
-  let response: [userResponse]
+export default function returnUser(address: string): userResponse[] {
+  const response: userResponse[] = []
   for (let i = 0; i < testRoles.length; i++) {
     if (testRoles[i].address === address) {
       response.push(testRoles[i])
