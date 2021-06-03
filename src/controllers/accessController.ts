@@ -16,7 +16,7 @@ function accessController(req: Request, res: Response): void {
       test(res, credentials, eventType, component)
       break
     case 'json':
-      json(res, credentials.address)
+      json(res, credentials.address, eventType, component)
       break
     case 'keycloak':
       keycloak(res, credentials.token, eventType, component)
