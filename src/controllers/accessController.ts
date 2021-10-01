@@ -1,33 +1,16 @@
 import { Request, Response } from 'express'
-import test from '../authModules/test'
-import keycloak from '../authModules/keycloakToken'
-import address from '../authModules/keycloakAddress'
-import json from '../authModules/json'
+import roleController from './roleController'
+import assetController from './assetController'
 
 function accessController(req: Request, res: Response): void {
-  const { eventType, component, credentials } = req.body
-  let { authService } = req.body
-  if (authService === ('' || undefined)) {
-    authService = process.env.DEFAULT_AUTH_SERVICE
-  }
+  const { eventType, did, credentials } = req.body
 
-  switch (authService) {
-    case 'test':
-      test(res, credentials, eventType, component)
-      break
-    case 'json':
-      json(res, credentials.address, eventType, component)
-      break
-    case 'keycloak':
-      keycloak(res, credentials.token, eventType, component)
-      break
-    case 'address':
-      address(res, credentials.address, eventType, component)
-      break
-    default:
-      console.log('Auth Type unkown')
-      res.json(false)
-      break
+  if (eventType === 'consume') {
+    console.log('Check allow / deny list')
+    assetController(did, credentials)
+  } else {
+    console.log('Only check role')
+    roleController(req, res)
   }
 }
 
