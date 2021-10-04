@@ -1,19 +1,15 @@
 import { Response } from 'express'
 import { checkRole } from '../utils/checkRole'
 import checkAbilities from '../utils/checkAbilities'
-
-interface Credentials {
-  type: string
-  token: string
-}
+import { credentials } from '../@types/types'
 
 export default function test(
   res: Response,
-  credentials: Credentials,
+  credentials: credentials,
   eventType: string,
   component: string
 ): void {
-  const role = checkRole(credentials.type, credentials.token)
+  const role = checkRole(credentials.type, credentials.value)
   console.log('role:', role)
   const response = checkAbilities(role, eventType, component)
   console.log('Permission response:', response)

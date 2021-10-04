@@ -1,28 +1,29 @@
-import { Request, Response } from 'express'
+import { Response } from 'express'
 import test from '../authModules/test'
 import keycloak from '../authModules/keycloakToken'
 import address from '../authModules/keycloakAddress'
 import json from '../authModules/json'
+import { credentials } from '../@types/types'
 
-function accessController(req: Request, res: Response): void {
-  const { eventType, component, credentials } = req.body
-  let { authService } = req.body
-  if (authService === ('' || undefined)) {
-    authService = process.env.DEFAULT_AUTH_SERVICE
-  }
-
+function roleController(
+  res: Response,
+  eventType: string,
+  component: string,
+  authService: string,
+  credentials: credentials
+): void {
   switch (authService) {
     case 'test':
       test(res, credentials, eventType, component)
       break
     case 'json':
-      json(res, credentials.address, eventType, component)
+      json(res, credentials.value, eventType, component)
       break
     case 'keycloak':
-      keycloak(res, credentials.token, eventType, component)
+      keycloak(res, credentials.value, eventType, component)
       break
     case 'address':
-      address(res, credentials.address, eventType, component)
+      address(res, credentials.value, eventType, component)
       break
     default:
       console.log('Auth Type unkown')
@@ -31,4 +32,4 @@ function accessController(req: Request, res: Response): void {
   }
 }
 
-export default accessController
+export default roleController
