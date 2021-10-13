@@ -1,18 +1,23 @@
 import { Request, Response } from 'express'
 import roleController from './roleController'
+import getDDO from '../utils/getDDO'
 
 interface credentials {
   type: string
   value: string
 }
 
-function assetController(
+async function assetController(
   res: Response,
   did: string,
   authService: string,
   credentials: credentials
-): void {
+): Promise<void> {
   console.log({ did, credentials })
+  console.log('Request DDO from aquarius')
+  const DDO = await getDDO(did)
+  console.log({ DDO })
+
   switch (authService) {
     case 'json':
       console.log('Checking DDO from json')
