@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import roleController from './roleController'
 import getDDO from '../utils/getDDO'
+import checkProfile from '../authModules/keycloackCheckDDO'
 
 interface credentials {
   type: string
@@ -18,14 +19,14 @@ async function assetController(
   const DDO = await getDDO(did)
   console.log({ DDO })
 
-  switch (authService) {
-    case 'json':
-      console.log('Checking DDO from json')
-      break
-    case 'keycloak':
-      console.log('checking DDO')
-      break
-    default:
+  if (authService === 'keycloak') {
+    console.log('checking DDO from keycloak')
+    const profile = await checkProfile(res, credentials.value)
+    console.log({ profile })
+  } else if (authService === 'json') {
+    console.log('Checking DDO from json')
+  } else {
+    console.log('Unrecognised authService')
   }
 
   res.send(true)

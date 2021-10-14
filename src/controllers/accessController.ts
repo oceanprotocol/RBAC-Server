@@ -6,13 +6,13 @@ import { credentials } from '../@types/types'
 function accessController(req: Request, res: Response): void {
   const {
     eventType,
-    did,
     component,
+    did,
     credentials
   }: {
     eventType: string
-    did: string
     component: string
+    did?: string
     credentials: credentials
   } = req.body
   let { authService }: { authService: string | undefined } = req.body
