@@ -8,7 +8,7 @@ interface keycloakProfileResponse {
   roles: [string]
 }
 
-export default async function checkProfile(
+export default async function getProfile(
   res: Response,
   address: string
 ): Promise<keycloakProfileResponse> {
