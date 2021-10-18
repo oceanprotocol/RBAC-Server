@@ -1,11 +1,11 @@
 import { Response } from 'express'
 import { checkRole } from '../utils/checkRole'
 import checkAbilities from '../utils/checkAbilities'
-import { credentials } from '../@types/types'
+import { requestCredentials } from '../@types/types'
 
 export default function test(
   res: Response,
-  credentials: credentials,
+  credentials: requestCredentials,
   eventType: string,
   component: string
 ): void {

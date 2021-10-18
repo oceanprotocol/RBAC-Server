@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import roleController from './roleController'
 import assetController from './assetController'
-import { credentials } from '../@types/types'
+import { requestCredentials } from '../@types/types'
 
 function accessController(req: Request, res: Response): void {
   const {
@@ -13,7 +13,7 @@ function accessController(req: Request, res: Response): void {
     eventType: string
     component: string
     did?: string
-    credentials: credentials
+    credentials: requestCredentials
   } = req.body
   let { authService }: { authService: string | undefined } = req.body
   if (authService === ('' || undefined)) {

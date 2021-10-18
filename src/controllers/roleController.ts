@@ -3,14 +3,14 @@ import test from '../authModules/test'
 import keycloak from '../authModules/keycloakToken'
 import address from '../authModules/keycloakAddress'
 import json from '../authModules/json'
-import { credentials } from '../@types/types'
+import { requestCredentials } from '../@types/types'
 
 function roleController(
   res: Response,
   eventType: string,
   component: string,
   authService: string,
-  credentials: credentials
+  credentials: requestCredentials
 ): void {
   switch (authService) {
     case 'test':
