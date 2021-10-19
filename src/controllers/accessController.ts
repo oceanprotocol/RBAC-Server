@@ -22,7 +22,7 @@ function accessController(req: Request, res: Response): void {
 
   if (eventType === 'consume') {
     console.log('Check allow / deny list')
-    assetController(res, did, authService, credentials)
+    assetController(res, eventType, component, did, authService, credentials)
   } else {
     console.log('Only check role')
     roleController(res, eventType, component, authService, credentials)

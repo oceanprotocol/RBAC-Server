@@ -8,28 +8,42 @@ import { Credentials } from '@oceanprotocol/lib'
 
 async function assetController(
   res: Response,
+  eventType: string,
+  component: string,
   did: string,
   authService: string,
   credentials: requestCredentials
 ): Promise<void> {
+  let profileAllowed: boolean
   console.log('Request DDO from aquarius')
   const ddo = await getDDO(did)
   const ddoCredentials: Credentials = ddo.credentials
   console.log({ ddoCredentials })
   if (ddoCredentials === undefined) {
-    res.send(true)
-    return
+    profileAllowed = true
   } else {
     if (authService === 'keycloak') {
       console.log('checking DDO from keycloak')
       const userProfile = await getProfile(res, credentials.value)
       console.log({ userProfile })
-      authenticateProfile(res, userProfile, credentials, ddoCredentials)
+      profileAllowed = await authenticateProfile(
+        res,
+        userProfile,
+        credentials,
+        ddoCredentials
+      )
     } else if (authService === 'json') {
+      // TODO Implement json profile checking service
       console.log('Checking DDO from json')
     } else {
       console.log('Unrecognised authService')
+      res.send(false)
     }
+  }
+  if (profileAllowed === true) {
+    roleController(res, eventType, component, authService, credentials)
+  } else {
+    res.send(false)
   }
 }
 
