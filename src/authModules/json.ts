@@ -15,7 +15,7 @@ export default async function address(
 ): Promise<void> {
   try {
     const resJSON: jsonResponse[] = returnUser(address)
-    // Respond flase if no users are found
+    // Respond false if no users are found
     if (resJSON.length < 1) {
       res.json(false)
       return
@@ -25,8 +25,8 @@ export default async function address(
     for (let i = 0; i < resJSON.length; i++) {
       const roles: string[] = resJSON[i].userRoles
       // Looping through all the roles the user has
-      for (let i = 0; i < roles.length; i++) {
-        result = checkAbilities(roles[i], eventType, component)
+      for (let j = 0; j < roles.length; j++) {
+        result = checkAbilities(roles[j], eventType, component)
         if (result === true) {
           break
         } else {
