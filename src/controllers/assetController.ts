@@ -1,4 +1,4 @@
-import { Request, Response } from 'express'
+import { Response } from 'express'
 import roleController from './roleController'
 import getDDO from '../utils/getDDO'
 import getProfile from '../authModules/keycloackGetProfile'
@@ -21,7 +21,7 @@ async function assetController(
   const ddoCredentials: Credentials = ddo.credentials
   let userProfile: profile
   if (ddoCredentials === undefined) {
-    // Profile is default allowed is no allow or dny list exists.
+    // Profile is default allowed if no allow or deny list exists.
     profileAllowed = true
   } else {
     if (authService === 'keycloak') {
@@ -29,7 +29,7 @@ async function assetController(
       userProfile = await getProfile(res, credentials.value)
     } else if (authService === 'json') {
       // Requesting user profile from json env or file
-      userProfile = await getProfileJson(credentials.value)
+      userProfile = await getProfileJson(res, credentials.value)
     } else {
       console.error('Unrecognised authService')
       res.send(false)

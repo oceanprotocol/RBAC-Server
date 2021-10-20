@@ -14,6 +14,7 @@ export default async function getProfile(
     const resJSON: profile = await response.json()
     return resJSON
   } catch (error) {
+    // Respond false if no user profile can be found
     console.error(error)
     res.json(false)
   }
