@@ -12,6 +12,7 @@ export default defineAbility((can, cannot) => {
 
   // Provider
   can('access', 'provider')
+  can('consume', 'provider')
   can('compute', 'provider')
   cannot('encryptUrl', 'provider')
   cannot('initialize', 'provider')
