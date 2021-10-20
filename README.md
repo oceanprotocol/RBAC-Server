@@ -1,6 +1,11 @@
 # Role-Based Access Control Server
 
-This is the Ocean role-based access control (RBAC) server. It currently works with [Keycloak](https://www.keycloak.org/) but has been designed to expand to other identity management services.
+This is the Ocean role-based access control (RBAC) server. The RBAC server is used to implement fine-grained permissions on browsing, consumer and publishing data assets. The permissions are controlled precisely at two levels:
+
+- Marketplace-level permissions for browsing, consuming or publishing within a marketplace frontend. The RBAC checks the user's role and restricts their ability to interact with the market based on the abilities associated with that role.
+- Asset-level permissions on consuming a specific asset. This is supported through allow and deny lists. In addition to checking the role, the RBAC server also requests the DDO from aquarius and checks if the user's profile is in either the allow or deny list. This check only takes place on requests with the `"eventType"= "consume"`.
+
+User profiles and roles can be stored in [Keycloak](https://www.keycloak.org/) or in json. The functionality has also been designed so that it is easy to expand to use other identity management services.
 
 ## Getting started
 
@@ -48,7 +53,21 @@ npm run start:docker
 
 4. Now you are ready to send requests to the RBAC server via postman. Make sure to replace the URL to `http://localhost:49160` in your requests.
 
-## Sending Keycloak requests
+## Environmental Variable List
+
+- KEYCLOAK_URL = [Optional] URL for requesting user roles with a JWT login token
+- KEYCLOAK_ADDRESS_URL = [Optional] URL for requesting user roles with an Ethereum address
+- KEYCLOAK_PROFILE_URL = [Optional] URL for requesting user profiles with an Ethereum address
+- DEFAULT_AUTH_SERVICE = [Required] Either "json" or "keycloak". This will determin where the RBAC server looks for the roles and profiles.
+- JSON_DATA = [Optional] json of user roles. This is required for deployment to Barge.
+- JSON_PROFILE_DATA = [Optional] json of user profiles. This is required for deployment to Barge.
+- METADATACACHE_URI = [Required] URI of Aquarius instance.
+
+## Setting Default Auth Service
+
+You can change the default auth service in the .env file e.g. `DEFAULT_AUTH_SERVICE = "keycloak"`. This is the auth service that will be used if no `authService` is defined within the request.
+
+## Sending Requests
 
 ### Step 1
 
@@ -56,214 +75,37 @@ npm run start:docker
 
 ### Step 2
 
-- Send a POST request to `https://keycloak-int.data-marketplace.io/auth/realms/marketplace/protocol/openid-connect/token`
-
-Use the following body for the request:
-
-Format: `x-www-form-urlencoded`
-
-```
-client_id:portal
-username:jamie@ocean.com
-password:test
-grant_type:password
-```
-
-The response will contain an access token, for example:
-
-```JSON
-{
-    "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJDWVdQTTJLY1NKUjJtV0o2ZFBqZTVKVmZ5YTZnZXdhVElVZDBabUoyWndFIn0.eyJleHAiOjE2MjAwMzc2MzEsImlhdCI6MTYyMDAzNzMzMSwianRpIjoiNjdmZGRlNGYtNzM4Mi00N2U2LWE2Y2EtMjc3YzcyZDA0MzYwIiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay1pbnQuZGF0YS1tYXJrZXRwbGFjZS5pby9hdXRoL3JlYWxtcy9tYXJrZXRwbGFjZSIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiJkZDM2NDVlZi0zN2Q5LTQzMzQtOWEzYy1jMjczNTRkYmNkMWMiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJwb3J0YWwiLCJzZXNzaW9uX3N0YXRlIjoiOGMwM2VhZmQtODMzZi00MWNlLWEwYzMtOWZlZDQ4ZDA2YWQxIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwczovL3BvcnRhbC1pbnQuZGF0YS1tYXJrZXRwbGFjZS5pbyJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJwdWJsaXNoZXIiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoiamFtaWUgb2NlYW4iLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJqYW1pZUBvY2Vhbi5jb20iLCJnaXZlbl9uYW1lIjoiamFtaWUiLCJmYW1pbHlfbmFtZSI6Im9jZWFuIiwiZW1haWwiOiJqYW1pZUBvY2Vhbi5jb20ifQ.Yyom-e4n5ut8TFsbZMX_dleg6mvKfktHJe5M2LVPSqVWzjw_bxqYSB9zvg0cW2LFc5M7KT8yc-oHCaQJ52Htwjo94aoy3SpiVWeWv_Y9wz6F-uMipAO2FjWZ9K8NjgGYmbD8Lx0E05QA7S_W_jV09Jj8D5ywUOoqRo0xR6kLS3Fqtuu46pmX8TAGIw8UT3zXctQOqt6XvBFtq-5DMnfRNscBK0XzScPJ-UWIKlrc0LpmzS_ss7bi14lrn2WkTEmxW2BmmB6erGrXYXeJt7DahNRN9azai0rVXrIPsuYTBbBX7V2oreLXF8XeWZ5MYB7cz8Ib1y6_MKGYSdSikuEvEQ",
-    "expires_in": 300,
-    "refresh_expires_in": 1800,
-    "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI1ZTE4NWQ3OC1iMGEyLTQwY2QtYWJhMS0wZTA3ODlhYjU4NTIifQ.eyJleHAiOjE2MjAwMzkxMzEsImlhdCI6MTYyMDAzNzMzMSwianRpIjoiNzNmYmVlODEtYTZkYy00ODQ4LWFkNWYtNTdmYWM5Zjg4M2MyIiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay1pbnQuZGF0YS1tYXJrZXRwbGFjZS5pby9hdXRoL3JlYWxtcy9tYXJrZXRwbGFjZSIsImF1ZCI6Imh0dHBzOi8va2V5Y2xvYWstaW50LmRhdGEtbWFya2V0cGxhY2UuaW8vYXV0aC9yZWFsbXMvbWFya2V0cGxhY2UiLCJzdWIiOiJkZDM2NDVlZi0zN2Q5LTQzMzQtOWEzYy1jMjczNTRkYmNkMWMiLCJ0eXAiOiJSZWZyZXNoIiwiYXpwIjoicG9ydGFsIiwic2Vzc2lvbl9zdGF0ZSI6IjhjMDNlYWZkLTgzM2YtNDFjZS1hMGMzLTlmZWQ0OGQwNmFkMSIsInNjb3BlIjoicHJvZmlsZSBlbWFpbCJ9.ZtVpuzOAkeiAsjcZOskfqOeCPoaPKdS6-6ObfWBdSTE",
-    "token_type": "Bearer",
-    "not-before-policy": 0,
-    "session_state": "8c03eafd-833f-41ce-a0c3-9fed48d06ad1",
-    "scope": "profile email"
-}
-```
+- Start the RBAC server either locally or in a docker container (see instructions above).
 
 ### Step 3
 
-- Now send a `POST` request to this URL: `http://localhost:3000`
+- Now send a `POST` request to the RBAC URL, if you are running it locally the address will be `http://localhost:3000`.
 
 The body of the request should be in the following format:
 
 ```JSON
 {
      "eventType": "publish",
-     "component": "market",
-     "authService": "keycloak",
-     "credentials": {
-              "type": "3BoxProfile",
-              "token": "<INSERT ACCESS_TOKEN FROM STEP 2>"
-     }
-}
-```
-
-Make sure to insert the token that you have recieved from Keycloak in step 2.
-
-## Sending Address requests
-
-You can find out the permission of the user using their address by sending a POST request in this format:
-
-```JSON
-{
-     "eventType": "consume",
      "component": "market" ,
-     "authService": "address",
-     "credentials": {
-              "address":"0xETHEURM_ADRESS"
-     }
-}
-```
-
-If you are running the RBAC server locally the POST request should be sent to: `http://localhost:3000`
-
-## Sending JSON requests
-
-If you want to check if an address is currently in an allow or deny json list you can send a POST request in the following format:
-
-```JSON
-{
-     "authService": "json",
-     "credentials": {
-              "address":"0x2dc7656ec7db88b098defb751b7401b5f6d8976f"
-     }
-}
-```
-
-If you are running the RBAC server locally the POST request should be sent to: `http://localhost:3000`
-
-## Setting Default Auth Service
-
-You can change the default auth service in the .env file e.g. `DEFAULT_AUTH_SERVICE = "keycloak"`. This is the auth service that will be used if no `authService` is defined within the request.
-
-## Sending Test requests
-
-- Download and install [Postman](https://www.postman.com/downloads/)
-
-- Send a POST request to `http://localhost:3000`
-
-- Use one of the following JSON snippets as the body of the request:
-
-```JSON
-{
-     "eventType": "publish",
-     "component": "market" ,
-     "authService": "test",
      "credentials": {
               "type": "address",
-              "token": "0x0123456789"
+              "value": "0xETHEURM_ADRESS"
      }
 }
 ```
 
-```JSON
-{
-     "eventType": "publish",
-     "component": "provider" ,
-     "authService": "test",
-     "credentials": {
-              "type": "Oauth2",
-              "token": "0N2JK21J7I55U7HK8459J2N34506J43K"
-     }
-}
-```
+#### Consume requests
+
+If the eventType is "consume" the request format must include the did of the asset. This is because the DDO needs to be requested and checked for an allow or deny list. For example:
 
 ```JSON
 {
-     "eventType": "delete",
+     "eventType": "consume",
      "component": "market" ,
-     "authService": "test",
+     "did": "did:op:e0089c4BAC163b571649f6AC4614580f968A2294",
      "credentials": {
               "type": "address",
-              "token": "0x0123456789"
-     }
-}
-```
-
-```JSON
-{
-     "eventType": "publish",
-     "component": "market" ,
-     "authService": "test",
-     "credentials": {
-              "type": "3BoxProfile",
-              "token": "0x9876543210"
-     }
-}
-```
-
-```JSON
-{
-     "eventType": "delete",
-     "component": "provider" ,
-     "authService": "test",
-     "credentials": {
-              "type": "Oauth2",
-              "token": "0N2JK21J7I55U7HK8459J2N34506J43K"
-     }
-}
-```
-
-```JSON
-{
-     "eventType": "consume",
-     "component": "market" ,
-     "authService": "test",
-     "credentials": {
-              "type": "3BoxProfile",
-              "token": "0x9876543210"
-     }
-}
-```
-
-```JSON
-{
-     "eventType": "publish",
-     "component": "market" ,
-     "authService": "test",
-     "credentials": {
-              "type": "Ldap",
-              "token": "NJKJ7I5UHK45JNJ43K"
-     }
-}
-```
-
-```JSON
-{
-     "eventType": "publish",
-     "component": "provider" ,
-     "authService": "test",
-     "credentials": {
-              "type": "3BoxProfile",
-              "token": "0x9876543210"
-     }
-}
-```
-
-```JSON
-{
-     "eventType": "delete",
-     "component": "market" ,
-     "authService": "test",
-     "credentials": {
-              "type": "3BoxProfile",
-              "token": "0x9876543210"
-     }
-}
-```
-
-```JSON
-{
-     "eventType": "consume",
-     "component": "market" ,
-     "authService": "test",
-     "credentials": {
-              "type": "Ldap",
-              "token": "NJKJ7I5UHK45JNJ43K"
+              "value": "0xETHEURM_ADRESS"
      }
 }
 ```
