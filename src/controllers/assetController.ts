@@ -16,24 +16,22 @@ async function assetController(
   credentials: requestCredentials
 ): Promise<void> {
   let profileAllowed: boolean
-  console.log('Request DDO from aquarius')
+  // Request DDO from aquarius
   const ddo = await getDDO(did)
   const ddoCredentials: Credentials = ddo.credentials
-  console.log({ ddoCredentials })
   let userProfile: profile
   if (ddoCredentials === undefined) {
+    // Profile is default allowed is no allow or dny list exists.
     profileAllowed = true
   } else {
     if (authService === 'keycloak') {
-      console.log('checking DDO from keycloak')
+      // Requesting user profile from Keycloak
       userProfile = await getProfile(res, credentials.value)
-      console.log({ userProfile })
     } else if (authService === 'json') {
-      console.log('Checking DDO from json')
+      // Requesting user profile from json env or file
       userProfile = await getProfileJson(credentials.value)
-      console.log({ userProfile })
     } else {
-      console.log('Unrecognised authService')
+      console.error('Unrecognised authService')
       res.send(false)
     }
     profileAllowed = await authenticateProfile(

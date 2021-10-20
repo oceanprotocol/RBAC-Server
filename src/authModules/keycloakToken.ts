@@ -48,7 +48,7 @@ export default async function keycloak(
       return response.status
     },
     function (error) {
-      console.log(error.message)
+      console.error(error.message)
       res.json(false)
     }
   )

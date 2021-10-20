@@ -9,18 +9,12 @@ async function checkCredentials(
 ): Promise<boolean> {
   for (let i = 0; i < credentialArray.length; i++) {
     const type = credentialArray[i].type
-    console.log('type', type)
-    console.log('Profile type: ', profile[`${type}`])
     for (let j = 0; j < credentialArray[i].values.length; j++) {
-      console.log('j', j)
       const value = credentialArray[i].values[j]
-      console.log('value', value)
 
       if (type === 'address' && value === credentials.value) {
-        console.log(true)
         return true
       } else if (value === profile[`${type}`]) {
-        console.log(true)
         return true
       }
     }
@@ -36,6 +30,7 @@ async function authenticateProfile(
 ): Promise<boolean> {
   let isAllowed
   if (ddoCredentials.allow === undefined || ddoCredentials.allow.length === 0) {
+    // User is default allowed if no allowList exists in the DDO
     isAllowed = true
   } else {
     isAllowed = await checkCredentials(

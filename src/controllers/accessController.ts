@@ -21,10 +21,10 @@ function accessController(req: Request, res: Response): void {
   }
 
   if (eventType === 'consume') {
-    console.log('Check allow / deny list')
+    // Allow / Deny lists are check when eventType === 'consume'
     assetController(res, eventType, component, did, authService, credentials)
   } else {
-    console.log('Only check role')
+    // Only the role is checked for all other eventTypes
     roleController(res, eventType, component, authService, credentials)
   }
 }

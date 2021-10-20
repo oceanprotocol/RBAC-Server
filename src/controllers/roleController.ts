@@ -26,7 +26,7 @@ function roleController(
       address(res, credentials.value, eventType, component)
       break
     default:
-      console.log('Auth Type unkown')
+      console.error('Auth Type unknown')
       res.json(false)
       break
   }
