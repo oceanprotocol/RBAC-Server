@@ -18,6 +18,8 @@ async function assetController(
   let profileAllowed: boolean
   // Request DDO from aquarius
   const ddo = await getDDO(did)
+  // Immediately send true response if request is from asset owner
+  ddo.publicKey[0].owner === credentials.value && res.send(true)
   const ddoCredentials: Credentials = ddo.credentials
   let userProfile: any
   if (ddoCredentials === undefined) {
