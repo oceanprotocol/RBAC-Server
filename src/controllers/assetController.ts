@@ -4,7 +4,7 @@ import getDDO from '../utils/getDDO'
 import getProfile from '../authModules/keycloackGetProfile'
 import getProfileJson from '../authModules/jsonGetProfile'
 import authenticateProfile from '../authModules/authenticateProfile'
-import { requestCredentials, profile } from '../@types/types'
+import { requestCredentials } from '../@types/types'
 import { Credentials } from '@oceanprotocol/lib'
 
 async function assetController(
@@ -19,7 +19,7 @@ async function assetController(
   // Request DDO from aquarius
   const ddo = await getDDO(did)
   const ddoCredentials: Credentials = ddo.credentials
-  let userProfile: profile
+  let userProfile: any
   if (ddoCredentials === undefined) {
     // Profile is default allowed if no allow or deny list exists.
     profileAllowed = true

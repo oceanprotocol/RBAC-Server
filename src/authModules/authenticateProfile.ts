@@ -1,10 +1,10 @@
 import { Response } from 'express'
-import { requestCredentials, profile } from '../@types/types'
+import { requestCredentials } from '../@types/types'
 import { Credentials, Credential } from '@oceanprotocol/lib'
 
 async function checkCredentials(
   credentialArray: Credential[],
-  profile: profile,
+  profile: any,
   credentials: requestCredentials
 ): Promise<boolean> {
   if (credentialArray === undefined || credentialArray.length === 0) {
@@ -28,7 +28,7 @@ async function checkCredentials(
 
 async function authenticateProfile(
   res: Response,
-  profile: profile,
+  profile: any,
   credentials: requestCredentials,
   ddoCredentials: Credentials
 ): Promise<boolean> {

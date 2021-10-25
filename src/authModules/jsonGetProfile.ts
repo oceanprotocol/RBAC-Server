@@ -1,6 +1,5 @@
 import { Response } from 'express'
 import testProfiles from '../data/testProfiles.json'
-import { profile } from '../@types/types'
 const jsonData = process.env.JSON_PROFILE_DATA
   ? JSON.parse(process.env.JSON_PROFILE_DATA)
   : testProfiles
@@ -8,7 +7,7 @@ const jsonData = process.env.JSON_PROFILE_DATA
 export default async function getProfileJson(
   res: Response,
   address: string
-): Promise<profile> {
+): Promise<any> {
   for (let i = 0; i < jsonData.length; i++) {
     if (jsonData[i].address === address) {
       return jsonData[i]
