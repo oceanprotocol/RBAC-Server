@@ -1,0 +1,32 @@
+[
+  {
+    "address": "0xB149C36986cf8e2B260d2Eb02AFf97058a1a5C95",
+    "domain": "oceanprotocol.com",
+    "email": "emptyuser@oceanprotocol.com",
+    "userRoles": []
+  },
+  {
+    "address": "0xD82552d74183558641CCB49eF853Bd4d7fEd79e1",
+    "domain": "oceanprotocol.com",
+    "email": "user@oceanprotocol.com",
+    "userRoles": ["validated", "user"]
+  },
+  {
+    "address": "0x45DfD415588CA6BcA80E5454FE087d91934dE604",
+    "domain": "oceanprotocol.com",
+    "email": "consumer@oceanprotocol.com",
+    "userRoles": ["consumer", "validated", "user"]
+  },
+  {
+    "address": "0x0d2E1BeCC38Cfd4D4b734CCDd7aC317D9E7337C2",
+    "domain": "oceanprotocol.com",
+    "email": "admin@oceanprotocol.com",
+    "userRoles": ["validated", "user", "admin"]
+  },
+  {
+    "address": "0xf31FC0D18A24c6Ae4225A0d4eEB709AC0a18E993",
+    "domain": "oceanprotocol.com",
+    "email": "publisher@oceanprotocol.com",
+    "userRoles": ["validated", "publisher", "user"]
+  }
+]
