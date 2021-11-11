@@ -42,12 +42,17 @@ async function assetController(
         res.send(false)
         return
       }
-      profileAllowed = await authenticateProfile(
-        res,
-        userProfile,
-        credentials,
-        ddoCredentials
-      )
+      if (!userProfile) {
+        console.log('Process terminated as no user profile found')
+        return
+      } else {
+        profileAllowed = await authenticateProfile(
+          res,
+          userProfile,
+          credentials,
+          ddoCredentials
+        )
+      }
     }
   }
   if (profileAllowed === true) {
