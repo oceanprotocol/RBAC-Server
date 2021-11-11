@@ -19,33 +19,41 @@ async function assetController(
   // Request DDO from aquarius
   const ddo = await getDDO(did)
   // Immediately send true response if request is from asset owner
-  ddo.publicKey[0].owner === credentials.value && res.send(true)
-  const ddoCredentials: Credentials = ddo.credentials
-  let userProfile: any
-  if (ddoCredentials === undefined) {
-    // Profile is default allowed if no allow or deny list exists.
-    profileAllowed = true
+  if (!ddo) {
+    console.error('Cannot retrieve DDO')
+    res.send(false)
+    return
   } else {
-    if (authService === 'keycloak') {
-      // Requesting user profile from Keycloak
-      userProfile = await getProfile(res, credentials.value)
-    } else if (authService === 'json') {
-      // Requesting user profile from json env or file
-      userProfile = await getProfileJson(res, credentials.value)
+    ddo.publicKey[0].owner === credentials.value && res.send(true)
+    const ddoCredentials: Credentials = ddo.credentials
+    let userProfile: any
+    if (ddoCredentials === undefined) {
+      // Profile is default allowed if no allow or deny list exists.
+      profileAllowed = true
     } else {
-      console.error('Unrecognised authService')
-      res.send(false)
+      if (authService === 'keycloak') {
+        // Requesting user profile from Keycloak
+        userProfile = await getProfile(res, credentials.value)
+      } else if (authService === 'json') {
+        // Requesting user profile from json env or file
+        userProfile = await getProfileJson(res, credentials.value)
+      } else {
+        console.error('Unrecognised authService')
+        res.send(false)
+        return
+      }
+      profileAllowed = await authenticateProfile(
+        res,
+        userProfile,
+        credentials,
+        ddoCredentials
+      )
     }
-    profileAllowed = await authenticateProfile(
-      res,
-      userProfile,
-      credentials,
-      ddoCredentials
-    )
   }
   if (profileAllowed === true) {
     roleController(res, eventType, component, authService, credentials)
   } else {
+    console.log('Profile is not allowed')
     res.send(false)
   }
 }

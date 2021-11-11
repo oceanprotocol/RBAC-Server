@@ -56,6 +56,7 @@ async function authenticateProfile(
   } catch (error) {
     console.error(error)
     res.send(false)
+    return
   }
 }
 
