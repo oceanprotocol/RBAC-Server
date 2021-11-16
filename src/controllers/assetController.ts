@@ -23,38 +23,37 @@ async function assetController(
     console.error('Cannot retrieve DDO')
     res.send(false)
     return
-  } else {
-    ddo.publicKey[0].owner === credentials.value && res.send(true)
-    const ddoCredentials: Credentials = ddo.credentials
-    let userProfile: any
-    if (ddoCredentials === undefined) {
-      // Profile is default allowed if no allow or deny list exists.
-      profileAllowed = true
-    } else {
-      if (authService === 'keycloak') {
-        // Requesting user profile from Keycloak
-        userProfile = await getProfile(res, credentials.value)
-      } else if (authService === 'json') {
-        // Requesting user profile from json env or file
-        userProfile = await getProfileJson(res, credentials.value)
-      } else {
-        console.error('Unrecognised authService')
-        res.send(false)
-        return
-      }
-      if (!userProfile) {
-        console.log('Process terminated as no user profile found')
-        return
-      } else {
-        profileAllowed = await authenticateProfile(
-          res,
-          userProfile,
-          credentials,
-          ddoCredentials
-        )
-      }
-    }
   }
+  ddo.publicKey[0].owner === credentials.value && res.send(true)
+  const ddoCredentials: Credentials = ddo.credentials
+  let userProfile: any
+  if (ddoCredentials === undefined) {
+    // Profile is default allowed if no allow or deny list exists.
+    profileAllowed = true
+  } else {
+    if (authService === 'keycloak') {
+      // Requesting user profile from Keycloak
+      userProfile = await getProfile(res, credentials.value)
+    } else if (authService === 'json') {
+      // Requesting user profile from json env or file
+      userProfile = await getProfileJson(res, credentials.value)
+    } else {
+      console.error('Unrecognised authService')
+      res.send(false)
+      return
+    }
+    if (!userProfile) {
+      console.log('Process terminated as no user profile found')
+      return
+    }
+    profileAllowed = await authenticateProfile(
+      res,
+      userProfile,
+      credentials,
+      ddoCredentials
+    )
+  }
+
   if (profileAllowed === true) {
     roleController(res, eventType, component, authService, credentials)
   } else {
