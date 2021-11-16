@@ -16,4 +16,5 @@ export default async function getProfileJson(
   // Respond false if no user profile can be found
   console.error('User profile not found')
   res.send(false)
+  return
 }

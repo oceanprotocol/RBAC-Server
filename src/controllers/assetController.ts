@@ -19,6 +19,11 @@ async function assetController(
   // Request DDO from aquarius
   const ddo = await getDDO(did)
   // Immediately send true response if request is from asset owner
+  if (!ddo) {
+    console.error('Cannot retrieve DDO')
+    res.send(false)
+    return
+  }
   ddo.publicKey[0].owner === credentials.value && res.send(true)
   const ddoCredentials: Credentials = ddo.credentials
   let userProfile: any
@@ -35,6 +40,11 @@ async function assetController(
     } else {
       console.error('Unrecognised authService')
       res.send(false)
+      return
+    }
+    if (!userProfile) {
+      console.log('Process terminated as no user profile found')
+      return
     }
     profileAllowed = await authenticateProfile(
       res,
@@ -43,9 +53,11 @@ async function assetController(
       ddoCredentials
     )
   }
+
   if (profileAllowed === true) {
     roleController(res, eventType, component, authService, credentials)
   } else {
+    console.log('Profile is not allowed')
     res.send(false)
   }
 }
