@@ -5,11 +5,12 @@ import { Credentials, Credential } from '@oceanprotocol/lib'
 async function checkCredentials(
   credentialArray: Credential[],
   profile: any,
-  credentials: requestCredentials
+  credentials: requestCredentials,
+  skippedCheckResult = true
 ): Promise<boolean> {
   try {
     if (credentialArray === undefined || credentialArray.length === 0) {
-      return true
+      return skippedCheckResult
     } else {
       for (let i = 0; i < credentialArray.length; i++) {
         const type = credentialArray[i].type
@@ -45,7 +46,8 @@ async function authenticateProfile(
     const isDenied = await checkCredentials(
       ddoCredentials.deny,
       profile,
-      credentials
+      credentials,
+      false
     )
 
     if (isAllowed === false || isDenied === true) {
