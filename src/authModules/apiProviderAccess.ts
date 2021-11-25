@@ -3,7 +3,8 @@ import fetch from 'cross-fetch'
 
 export default async function getProfile(
   res: Response,
-  address: string
+  address: string,
+  providerAddress: string
 ): Promise<boolean | void> {
   try {
     const url = `${process.env.API_PROVIDER_CHECK}/${address}`
@@ -15,6 +16,6 @@ export default async function getProfile(
   } catch (error) {
     // Respond false if no user profile can be found
     console.error(error)
-    res.json(false)
+    return false
   }
 }

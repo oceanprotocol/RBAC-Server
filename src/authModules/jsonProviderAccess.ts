@@ -1,20 +1,24 @@
 import { Response } from 'express'
-import testProfiles from '../data/testProfiles.json'
+import testProviders from '../data/testProviders.json'
 const jsonData = process.env.JSON_PROFILE_DATA
   ? JSON.parse(process.env.JSON_PROFILE_DATA)
-  : testProfiles
+  : testProviders
 
-export default async function getProfileJson(
+export default async function jsonProviderAccess(
   res: Response,
-  address: string
+  address: string,
+  providerAddress: string
 ): Promise<boolean | void> {
   for (let i = 0; i < jsonData.length; i++) {
     if (jsonData[i].address === address) {
-      return jsonData[i]
+      for (let j = 0; j < jsonData[i].userProviders.length; j++) {
+        if (jsonData[i].userProviders[j] === providerAddress) {
+          return true
+        }
+      }
     }
   }
   // Respond false if no user profile can be found
-  console.error('User profile not found')
-  res.send(false)
-  return
+  console.error('User not found or User does not have access')
+  return false
 }
