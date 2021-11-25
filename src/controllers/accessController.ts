@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import roleController from './roleController'
 import assetController from './assetController'
+import publishController from './publishController'
 import { requestCredentials } from '../@types/types'
 
 function accessController(req: Request, res: Response): void {
@@ -23,6 +24,8 @@ function accessController(req: Request, res: Response): void {
   if (eventType === 'consume') {
     // Allow & Deny lists are check when eventType === 'consume'
     assetController(res, eventType, component, did, authService, credentials)
+  } else if (eventType === 'publish') {
+    publishController(res, eventType, component, did, authService, credentials)
   } else {
     // Only the role is checked for all other eventTypes
     roleController(res, eventType, component, authService, credentials)
