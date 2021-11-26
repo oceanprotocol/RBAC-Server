@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/oceanprotocol/RBAC-Server#readme",
   "dependencies": {
-    "@casl/ability": "^5.2.2",
+    "@casl/ability": "^5.4.3",
     "@oceanprotocol/lib": "^0.19.2",
     "axios": "^0.21.2",
     "cors": "^2.8.5",
