@@ -5,7 +5,7 @@ export default async function getProfile(
   res: Response,
   address: string,
   providerAddress: string
-): Promise<boolean | void> {
+): Promise<boolean> {
   try {
     const url = `${process.env.API_PROVIDER_CHECK}/${address}`
     const response = await fetch(url, {

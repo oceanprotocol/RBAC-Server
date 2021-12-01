@@ -8,7 +8,7 @@ export default async function jsonProviderAccess(
   res: Response,
   address: string,
   providerAddress: string
-): Promise<boolean | void> {
+): Promise<boolean> {
   for (let i = 0; i < jsonData.length; i++) {
     if (jsonData[i].address === address) {
       for (let j = 0; j < jsonData[i].userProviders.length; j++) {

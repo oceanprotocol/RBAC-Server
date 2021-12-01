@@ -1,6 +1,8 @@
 import { Response } from 'express'
 import roleController from './roleController'
 import { requestCredentials } from '../@types/types'
+import apiProviderAccess from '../authModules/apiProviderAccess'
+import jsonProviderAccess from '../authModules/jsonProviderAccess'
 
 async function publishController(
   res: Response,
