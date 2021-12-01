@@ -1,6 +1,6 @@
 import { Response } from 'express'
-import returnUser from '../utils/filterJson'
-import checkAbilities from '../utils/checkAbilities'
+import returnUser from '../../utils/filterJson'
+import checkAbilities from '../../utils/checkAbilities'
 interface jsonResponse {
   address: string
   id: string

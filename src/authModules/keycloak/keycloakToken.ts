@@ -1,7 +1,7 @@
 import { Response } from 'express'
 import fetch from 'cross-fetch'
 import jwt_decode from 'jwt-decode'
-import checkAbilities from '../utils/checkAbilities'
+import checkAbilities from '../../utils/checkAbilities'
 
 interface decodedToken {
   exp?: number

@@ -1,7 +1,7 @@
 import { Response } from 'express'
-import { checkRole } from '../utils/checkRole'
-import checkAbilities from '../utils/checkAbilities'
-import { requestCredentials } from '../@types/types'
+import { checkRole } from '../../utils/checkRole'
+import checkAbilities from '../../utils/checkAbilities'
+import { requestCredentials } from '../../@types/types'
 
 export default function test(
   res: Response,

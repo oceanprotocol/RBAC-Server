@@ -1,6 +1,6 @@
 import { Response } from 'express'
 import fetch from 'cross-fetch'
-import checkAbilities from '../utils/checkAbilities'
+import checkAbilities from '../../utils/checkAbilities'
 interface keycloakResponse {
   id: string
   userRoles: [string]

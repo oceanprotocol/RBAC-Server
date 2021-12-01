@@ -1,5 +1,5 @@
 import { Response } from 'express'
-import testProfiles from '../data/testProfiles.json'
+import testProfiles from '../../data/testProfiles.json'
 const jsonData = process.env.JSON_PROFILE_DATA
   ? JSON.parse(process.env.JSON_PROFILE_DATA)
   : testProfiles

@@ -1,8 +1,8 @@
 import { Response } from 'express'
-import test from '../authModules/test'
-import keycloak from '../authModules/keycloakToken'
-import address from '../authModules/keycloakAddress'
-import json from '../authModules/json'
+import test from '../authModules/other/test'
+import keycloak from '../authModules/keycloak/keycloakToken'
+import address from '../authModules/keycloak/keycloakAddress'
+import json from '../authModules/json/json'
 import { requestCredentials } from '../@types/types'
 
 function roleController(
