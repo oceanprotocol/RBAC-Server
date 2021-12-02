@@ -9,12 +9,14 @@ function accessController(req: Request, res: Response): void {
     eventType,
     component,
     did,
-    credentials
+    credentials,
+    providerAddress
   }: {
     eventType: string
     component: string
     did?: string
     credentials: requestCredentials
+    providerAddress?: string
   } = req.body
   let { authService }: { authService: string | undefined } = req.body
   if (authService === ('' || undefined)) {
@@ -25,7 +27,15 @@ function accessController(req: Request, res: Response): void {
     // Allow & Deny lists are check when eventType === 'consume'
     assetController(res, eventType, component, did, authService, credentials)
   } else if (eventType === 'publish') {
-    publishController(res, eventType, component, did, authService, credentials)
+    publishController(
+      res,
+      eventType,
+      component,
+      did,
+      authService,
+      credentials,
+      providerAddress
+    )
   } else {
     // Only the role is checked for all other eventTypes
     roleController(res, eventType, component, authService, credentials)

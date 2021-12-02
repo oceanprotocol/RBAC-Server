@@ -1,8 +1,8 @@
 import { Response } from 'express'
 import roleController from './roleController'
 import { requestCredentials } from '../@types/types'
-import apiProviderAccess from '../authModules/apiProviderAccess'
-import jsonProviderAccess from '../authModules/jsonProviderAccess'
+import apiProviderAccess from '../authModules/other/apiProviderAccess'
+import jsonProviderAccess from '../authModules/json/jsonProviderAccess'
 
 async function publishController(
   res: Response,
@@ -33,7 +33,6 @@ async function publishController(
     res.send(false)
     return
   }
-
   if (providerAllowed === true) {
     roleController(res, eventType, component, authService, credentials)
   } else {
