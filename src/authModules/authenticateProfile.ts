@@ -17,7 +17,10 @@ async function checkCredentials(
         for (let j = 0; j < credentialArray[i].values.length; j++) {
           const value = credentialArray[i].values[j]
 
-          if (type === 'address' && value === credentials.value) {
+          if (
+            type === 'address' &&
+            value.toLowerCase() === credentials.value.toLowerCase()
+          ) {
             return true
           } else if (value === profile[`${type}`]) {
             return true
