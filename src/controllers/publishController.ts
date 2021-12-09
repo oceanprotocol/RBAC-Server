@@ -14,7 +14,7 @@ async function publishController(
   providerAddress: string
 ): Promise<void> {
   let providerAllowed: boolean
-  if (authService === 'keycloak') {
+  if (authService === 'address') {
     // Checking from API if user is allowed to publish on provider
     providerAllowed = await apiProviderAccess(
       res,
