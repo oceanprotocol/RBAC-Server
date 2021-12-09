@@ -42,7 +42,7 @@ export default async function address(
     }
     res.json(result)
   } catch (error) {
-    console.error(error)
+    console.error('keycloak address Error:', error)
     res.json(false)
   }
 }

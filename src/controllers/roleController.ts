@@ -12,6 +12,7 @@ function roleController(
   authService: string,
   credentials: requestCredentials
 ): void {
+  console.log('Role controller')
   switch (authService) {
     case 'test':
       test(res, credentials, eventType, component)

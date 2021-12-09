@@ -14,7 +14,7 @@ export default async function getProfile(
     return resJSON
   } catch (error) {
     // Respond false if no user profile can be found
-    console.error(error)
+    console.error('keycloak getProfile Error:', error)
     res.json(false)
   }
 }

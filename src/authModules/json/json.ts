@@ -39,7 +39,7 @@ export default async function address(
     }
     res.json(result)
   } catch (error) {
-    console.error(error)
+    console.error('json address', error)
     res.json(false)
   }
 }
