@@ -1,7 +1,7 @@
 import { Response } from 'express'
 import testProviders from '../../data/testProviders.json'
-const jsonData = process.env.JSON_PROFILE_DATA
-  ? JSON.parse(process.env.JSON_PROFILE_DATA)
+const jsonData = process.env.JSON_PROVIDER_DATA
+  ? JSON.parse(process.env.JSON_PROVIDER_DATA)
   : testProviders
 
 export default async function jsonProviderAccess(
