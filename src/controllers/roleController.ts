@@ -19,10 +19,10 @@ function roleController(
     case 'json':
       json(res, credentials.value, eventType, component)
       break
-    case 'keycloak':
+    case 'oauth':
       keycloak(res, credentials.value, eventType, component)
       break
-    case 'address':
+    case 'keycloak':
       address(res, credentials.value, eventType, component)
       break
     default:

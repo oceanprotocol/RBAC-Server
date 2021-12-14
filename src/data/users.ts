@@ -1,6 +1,6 @@
 const users = [
   {
-    authType: 'address',
+    authType: 'oauth',
     auth: '0x0123456789',
     role: 'admin'
   },
@@ -20,7 +20,7 @@ const users = [
     role: 'user'
   },
   {
-    authType: 'address',
+    authType: 'oauth',
     auth: '0x948943387239032',
     role: 'admin'
   }
