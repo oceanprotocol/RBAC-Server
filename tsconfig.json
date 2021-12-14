@@ -16,6 +16,6 @@
     "sourceMap": true,
     "typeRoots": ["node_modules/@types"]
   },
-  "exclude": ["node_modules", "*.js", "*.json"],
+  "exclude": ["node_modules", "*.js", "*.json", "**/*.test.ts"],
   "include": ["./src/**/*"]
 }

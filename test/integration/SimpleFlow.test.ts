@@ -1,9 +1,10 @@
-import assert from 'chai'
+// prettier-ignore
+import { assert } from 'chai'
 
 describe('First test', function () {
   describe('#indexOf()', function () {
     it('should return -1 when the value is not present', function () {
-      assert.equal([1, 2, 3].indexOf(4), -1)
+      assert(1 === 3 - 2)
     })
   })
 })
