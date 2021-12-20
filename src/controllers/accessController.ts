@@ -3,8 +3,9 @@ import roleController from './roleController'
 import assetController from './assetController'
 import publishController from './publishController'
 import { requestCredentials } from '../@types/types'
+import eventTypeAPI from '../authModules/other/eventTypeAPI'
 
-function accessController(req: Request, res: Response): void {
+async function accessController(req: Request, res: Response): void {
   const {
     eventType,
     component,
@@ -21,6 +22,11 @@ function accessController(req: Request, res: Response): void {
   let { authService }: { authService: string | undefined } = req.body
   if (authService === ('' || undefined)) {
     authService = process.env.DEFAULT_AUTH_SERVICE
+  }
+  const eventTypeCheck = await eventTypeAPI(req.body)
+  if (eventTypeCheck === false) {
+    res.send(false)
+    return
   }
 
   if (eventType === 'consume') {
