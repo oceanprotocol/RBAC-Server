@@ -28,7 +28,7 @@ function setURL(eventType: string): string {
 
 export default async function eventTypeAPI(body: reqBody): Promise<boolean> {
   const url = setURL(body.eventType)
-  // If eventType API URL has not been defined as an env immediately return true
+  // Immediately return true if eventType API URL has not been defined as an env
   if (url === (undefined || '')) return true
   try {
     const response = await fetch(url, {
