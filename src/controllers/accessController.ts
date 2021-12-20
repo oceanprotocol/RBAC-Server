@@ -5,7 +5,7 @@ import publishController from './publishController'
 import { requestCredentials } from '../@types/types'
 import eventTypeAPI from '../authModules/other/eventTypeAPI'
 
-async function accessController(req: Request, res: Response): void {
+async function accessController(req: Request, res: Response) {
   const {
     eventType,
     component,
