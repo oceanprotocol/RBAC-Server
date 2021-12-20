@@ -22,14 +22,16 @@ function setURL(eventType: string): string {
     case 'initialize':
       return `${process.env.EVENT_TYPE_API_INITIALIZE}`
     default:
-      break
+      return
   }
 }
 
 export default async function eventTypeAPI(body: reqBody): Promise<boolean> {
   const url = setURL(body.eventType)
   // Immediately return true if eventType API URL has not been defined as an env
-  if (url === (undefined || '')) return true
+  if (url === (undefined || null || '' || 'undefined')) {
+    return true
+  }
   try {
     const response = await fetch(url, {
       method: 'POST',
@@ -42,7 +44,7 @@ export default async function eventTypeAPI(body: reqBody): Promise<boolean> {
     return resJSON
   } catch (error) {
     // Respond false if no user profile can be found
-    console.error(error)
+    console.error('eventTypeAPI', error)
     return false
   }
 }
