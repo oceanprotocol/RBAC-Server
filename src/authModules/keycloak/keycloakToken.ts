@@ -1,7 +1,7 @@
 import { Response } from 'express'
 import fetch from 'cross-fetch'
 import jwt_decode from 'jwt-decode'
-import checkAbilities from '../utils/checkAbilities'
+import checkAbilities from '../../utils/checkAbilities'
 
 interface decodedToken {
   exp?: number
@@ -48,7 +48,7 @@ export default async function keycloak(
       return response.status
     },
     function (error) {
-      console.error(error.message)
+      console.error('Keycloak responseStatus', error.message)
       res.json(false)
     }
   )

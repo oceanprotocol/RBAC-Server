@@ -2,8 +2,10 @@ import { Request, Response } from 'express'
 import roleController from './roleController'
 import assetController from './assetController'
 import { requestCredentials } from '../@types/types'
+import eventTypeAPI from '../authModules/other/eventTypeAPI'
+import { reqBody } from '../@types/types'
 
-function accessController(req: Request, res: Response): void {
+async function accessController(body: reqBody, res: Response) {
   const {
     eventType,
     component,
@@ -14,10 +16,17 @@ function accessController(req: Request, res: Response): void {
     component: string
     did?: string
     credentials: requestCredentials
-  } = req.body
-  let { authService }: { authService: string | undefined } = req.body
+    providerAddress?: string
+  } = body
+  let authService = body.authService
   if (authService === ('' || undefined)) {
     authService = process.env.DEFAULT_AUTH_SERVICE
+  }
+  // First check permission in eventType API endpoint
+  const eventTypeCheck = await eventTypeAPI(body)
+  if (eventTypeCheck === false) {
+    res.send(false)
+    return
   }
 
   if (eventType === 'consume') {

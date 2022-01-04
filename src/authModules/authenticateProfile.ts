@@ -30,7 +30,7 @@ async function checkCredentials(
       return false
     }
   } catch (error) {
-    console.error(error)
+    console.error('checkCredentials Error:', error)
   }
 }
 
@@ -59,7 +59,7 @@ async function authenticateProfile(
       return true
     }
   } catch (error) {
-    console.error(error)
+    console.error('authenticateProfile', error)
     res.send(false)
     return
   }

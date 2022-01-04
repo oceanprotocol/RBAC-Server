@@ -1,10 +1,9 @@
 import { Response } from 'express'
-import returnUser from '../utils/filterJson'
-import checkAbilities from '../utils/checkAbilities'
-interface jsonResponse {
-  address: string
+import fetch from 'cross-fetch'
+import checkAbilities from '../../utils/checkAbilities'
+interface keycloakResponse {
   id: string
-  userRoles: string[]
+  userRoles: [string]
 }
 
 export default async function address(
@@ -14,8 +13,12 @@ export default async function address(
   component: string
 ): Promise<void> {
   try {
-    const resJSON: jsonResponse[] = returnUser(address)
-    // Respond false if no users are found
+    const url = `${process.env.KEYCLOAK_ADDRESS_URL}/${address}`
+    const response = await fetch(url, {
+      method: 'GET'
+    })
+    const resJSON: [keycloakResponse] = await response.json()
+    // Respond flase if no users are found
     if (resJSON.length < 1) {
       res.json(false)
       return
@@ -23,10 +26,10 @@ export default async function address(
     let result = false
     // Looping through all users that are returned for the address
     for (let i = 0; i < resJSON.length; i++) {
-      const roles: string[] = resJSON[i].userRoles
+      const roles: [string] = resJSON[i].userRoles
       // Looping through all the roles the user has
-      for (let j = 0; j < roles.length; j++) {
-        result = checkAbilities(roles[j], eventType, component)
+      for (let i = 0; i < roles.length; i++) {
+        result = checkAbilities(roles[i], eventType, component)
         if (result === true) {
           break
         } else {
@@ -39,7 +42,7 @@ export default async function address(
     }
     res.json(result)
   } catch (error) {
-    console.error(error)
+    console.error('keycloak address Error:', error)
     res.json(false)
   }
 }

@@ -1,0 +1,44 @@
+[
+  {
+    "address": "0xB149C36986cf8e2B260d2Eb02AFf97058a1a5C95",
+    "userProviders": [
+      "0x0d2E1BeCC38Cfd4D4b734CCDd7aC317D9E7337C2",
+      "0xf31FC0D18A24c6Ae4225A0d4eEB709AC0a18E993"
+    ]
+  },
+  {
+    "address": "0xD82552d74183558641CCB49eF853Bd4d7fEd79e1",
+    "userProviders": [
+      "0x0d2E1BeCC38Cfd4D4b734CCDd7aC317D9E7337C2",
+      "0xf31FC0D18A24c6Ae4225A0d4eEB709AC0a18E993"
+    ]
+  },
+  {
+    "address": "0x45DfD415588CA6BcA80E5454FE087d91934dE604",
+    "userProviders": [
+      "0x0d2E1BeCC38Cfd4D4b734CCDd7aC317D9E7337C2",
+      "0xf31FC0D18A24c6Ae4225A0d4eEB709AC0a18E993"
+    ]
+  },
+  {
+    "address": "0x0d2E1BeCC38Cfd4D4b734CCDd7aC317D9E7337C2",
+    "userProviders": [
+      "0x0d2E1BeCC38Cfd4D4b734CCDd7aC317D9E7337C2",
+      "0xf31FC0D18A24c6Ae4225A0d4eEB709AC0a18E993"
+    ]
+  },
+  {
+    "address": "0xf31FC0D18A24c6Ae4225A0d4eEB709AC0a18E993",
+    "userProviders": [
+      "0x0d2E1BeCC38Cfd4D4b734CCDd7aC317D9E7337C2",
+      "0xf31FC0D18A24c6Ae4225A0d4eEB709AC0a18E993"
+    ]
+  },
+  {
+    "address": "0xA78deb2Fa79463945C247991075E2a0e98Ba7A09",
+    "userProviders": [
+      "0x0d2E1BeCC38Cfd4D4b734CCDd7aC317D9E7337C2",
+      "0xf31FC0D18A24c6Ae4225A0d4eEB709AC0a18E993"
+    ]
+  }
+]

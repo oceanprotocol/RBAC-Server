@@ -6,7 +6,7 @@ const router = express.Router()
 
 /* GET Access role premissions. */
 router.post('/', function (req: Request, res: Response) {
-  accessController(req, res)
+  accessController(req.body, res)
 })
 
 export default router
