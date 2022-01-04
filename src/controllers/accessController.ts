@@ -18,10 +18,11 @@ async function accessController(body: reqBody, res: Response) {
     credentials: requestCredentials
     providerAddress?: string
   } = body
-  let { authService }: { authService: string | undefined } = body
+  let authService = body.authService
   if (authService === ('' || undefined)) {
     authService = process.env.DEFAULT_AUTH_SERVICE
   }
+  // First check permission in eventType API endpoint
   const eventTypeCheck = await eventTypeAPI(body)
   if (eventTypeCheck === false) {
     res.send(false)
