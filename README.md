@@ -79,7 +79,7 @@ You can change the default auth service in the .env file e.g. `DEFAULT_AUTH_SERV
 
 ### Step 3
 
-- Now send a `POST` request to the RBAC URL, if you are running it locally the address will be `http://localhost:3000`.
+- Now send a `POST` request to the RBAC URL, if you are running it locally the address will be `http://localhost:3301`.
 
 The body of the request should be in the following format:
 

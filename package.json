@@ -8,7 +8,7 @@
     "dev": "nodemon",
     "build": "npm run clean && tsc --sourcemap",
     "build:docker": "npm run build && docker build . -t ocean/rbac",
-    "start:docker": "docker run -p 49160:3000 -d ocean/rbac",
+    "start:docker": "docker run -p 49160:3301 -d ocean/rbac",
     "lint": "eslint --ignore-path .gitignore --ext .js --ext .ts --ext .tsx . && npm run type-check",
     "type-check": "tsc --noEmit",
     "format": "prettier --ignore-path .gitignore './**/*.{css,yml,js,ts,tsx,json}' --write",

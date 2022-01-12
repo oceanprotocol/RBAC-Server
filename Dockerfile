@@ -10,5 +10,5 @@ RUN npm run build
 
 # Replace KEYCLOAK_URL with the relevant URL for your own Keycloak hosting
 ENV KEYCLOAK_URL="INSERT_KEYCLOAK_URL_HERE"
-EXPOSE 3000
+EXPOSE 3301
 CMD [ "npm", "run", "start" ]
