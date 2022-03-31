@@ -1,6 +1,6 @@
 import { Response } from 'express'
 import roleController from './roleController'
-import getDDO from '../utils/getDDO'
+import getAsset from '../utils/getAsset'
 import getProfile from '../authModules/keycloak/keycloackGetProfile'
 import getProfileJson from '../authModules/json/jsonGetProfile'
 import authenticateProfile from '../authModules/authenticateProfile'
@@ -16,15 +16,15 @@ async function assetController(
   credentials: requestCredentials
 ): Promise<void> {
   let profileAllowed: boolean
-  // Request DDO from aquarius
-  const ddo = await getDDO(did)
-  // Immediately send true response if request is from asset owner
+  // Request Asset from aquarius
+  const ddo = await getAsset(did)
+  // Immediately send true response if request is from nft owner
   if (!ddo) {
     console.error('Cannot retrieve DDO')
     res.send(false)
     return
   }
-  if (ddo.publicKey[0].owner === credentials.value) {
+  if (ddo.nft.owner.toLowerCase() === credentials.value.toLowerCase()) {
     profileAllowed = true
   } else {
     const ddoCredentials: Credentials = ddo.credentials
