@@ -14,8 +14,8 @@ export default defineAbility((can, cannot) => {
   can('access', 'provider')
   can('consume', 'provider')
   can('compute', 'provider')
+  can('initialize', 'provider')
   cannot('encryptUrl', 'provider')
-  cannot('initialize', 'provider')
 
   /// Metadatacache
   cannot('publish', 'metadatacache')
