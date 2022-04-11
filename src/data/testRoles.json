@@ -48,5 +48,10 @@
     "address": "0x0dc7656ec7db88b098defb751b7401b5f6d8976f",
     "id": "05569134-6a5c-4afd-90a9-563caac94970",
     "userRoles": ["consumer", "user", "uma_authorization"]
+  },
+  {
+    "address": "0xA7bd68Fe237057Db75E07Fe9C62e5Ad0d4c12419",
+    "id": "8e27a9eb-d93f-4d1a-8042-f9aa4802c86f",
+    "userRoles": ["consumer", "user", "validated", "publisher"]
   }
 ]
