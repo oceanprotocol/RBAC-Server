@@ -28,5 +28,11 @@
     "domain": "oceanprotocol.com",
     "email": "publisher@oceanprotocol.com",
     "userRoles": ["validated", "publisher", "user"]
+  },
+  {
+    "address": "0xA7bd68Fe237057Db75E07Fe9C62e5Ad0d4c12419",
+    "domain": "oceanprotocol.com",
+    "email": "publisherPlusConsumer@oceanprotocol.com",
+    "userRoles": ["validated", "publisher", "user", "consumer"]
   }
 ]
