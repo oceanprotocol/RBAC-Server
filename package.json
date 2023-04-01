@@ -36,7 +36,7 @@
     "jwt-decode": "^3.1.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.7",
+    "@babel/core": "^7.21.4",
     "@babel/eslint-parser": "^7.19.1",
     "@babel/preset-typescript": "^7.21.0",
     "@types/express": "^4.17.14",
